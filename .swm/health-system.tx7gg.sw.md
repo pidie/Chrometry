@@ -9,8 +9,6 @@ The health system uses three main components - `HealthController`, `HealthCollid
 
 <br/>
 
-<br/>
-
 The saved data is the `maxHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:21:9:9:`        [SerializeField] private float maxHealth = 100f;`"/>, the `healthRegen`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:22:23:23:`        [SerializeField, Tooltip(&quot;Health regenerated per second&quot;)] private float healthRegen = 1.5f;`"/>, `healthRegenDelay`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:23:31:31:`        [SerializeField, Tooltip(&quot;Delay after taking damage before health will regenerate&quot;)] private float healthRegenDelay = 2.5f;`"/>, `_currentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:25:5:5:`        private float _currentHealth;`"/>, and whether or not the health `_canRegen`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:26:5:5:`        private bool _canRegen;`"/>.
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Health/HealthController.cs
