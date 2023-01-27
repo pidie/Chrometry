@@ -51,16 +51,15 @@ class HealthDisplayUI{
 
 # [HealthController](healthcontroller.5v1da.sw.md)
 
-The `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> is the brain of the health system. There should only be one `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> for any entity with a trackable health.
+The `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> is the brain of the health system. There should only be one `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> for any entity with a trackable health.<br/>
+<br/>
 
-The `HealthColliderController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:6:5:5:`    public class HealthColliderController : MonoBehaviour`"/> detects collisions that could affect the `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/>. It references a `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> and activates events for it.
+# HealthColliderController
 
-*   A `HealthColliderController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:6:5:5:`    public class HealthColliderController : MonoBehaviour`"/> does not need to be on the same game object as the `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> it references.
-    
-*   A single `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> can have multiple `HealthColliderController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:6:5:5:`    public class HealthColliderController : MonoBehaviour`"/>s referencing it.
-    
-*   A single `GameObject` can have multiple `HealthColliderController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:6:5:5:`    public class HealthColliderController : MonoBehaviour`"/>s on it, but they should be referencing different `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/>s.
-    
+The `HealthColliderController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:6:5:5:`    public class HealthColliderController : MonoBehaviour`"/> detects collisions that could affect the `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/>. It references a `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> and activates events for it.<br/>
+<br/>
+
+# HealthDisplayUI
 
 The `HealthDisplayUI`<swm-token data-swm-token=":Assets/Scripts/Health/HealthDisplayUI.cs:6:5:5:`    public class HealthDisplayUI : MonoBehaviour`"/> is used to interact with a user interface for displaying health information.
 
