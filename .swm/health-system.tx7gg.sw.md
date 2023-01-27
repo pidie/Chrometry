@@ -54,7 +54,7 @@ class HealthDisplayUI{
 The `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> is the brain of the health system. There should only be one `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> for any entity with a trackable health.<br/>
 <br/>
 
-# HealthColliderController
+# [HealthColliderController](healthcollidercontroller.aceyz.sw.md)
 
 The `HealthColliderController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:6:5:5:`    public class HealthColliderController : MonoBehaviour`"/> detects collisions that could affect the `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/>. It references a `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> and activates events for it.<br/>
 <br/>
