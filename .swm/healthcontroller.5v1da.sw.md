@@ -5,9 +5,7 @@ file_version: 1.1.1
 app_version: 1.0.20
 ---
 
-The `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> is the brain of the health system. There should only be one `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> for any entity with a trackable health.
-
-<br/>
+The `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> is the brain of the health system. There should only be one `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> for any entity with a trackable health.<br/>
 
 ## Fields
 
@@ -23,9 +21,7 @@ The `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthCo
 
 `onDeath`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:29:5:5:`        public Action onDeath;`"/> - invoked when the entity's health drops below 0.
 
-`onUpdateHealthDisplay`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:30:5:5:`        public Action onUpdateHealthDisplay;`"/> - invoked when the `_currentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:25:5:5:`        private float _currentHealth;`"/> has changed and the UI needs to update.
-
-<br/>
+`onUpdateHealthDisplay`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:30:5:5:`        public Action onUpdateHealthDisplay;`"/> - invoked when the `_currentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:25:5:5:`        private float _currentHealth;`"/> has changed and the UI needs to update.<br/>
 
 ## Functions
 
