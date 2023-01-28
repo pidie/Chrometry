@@ -41,14 +41,14 @@ namespace Health
         public void UpdateHealthDisplay()
         {
             if (_text != null)
-                _text.text = healthController.GetHealth().ToString();
+                _text.text = healthController.GetCurrentHealth().ToString();
             
             if (_iconPlayer != null)
             {
                 var maxHealth = healthController.GetMaxHealth();
                 var twentyPercent = maxHealth * 0.2f;
                 var eightyPercent = maxHealth * 0.8f;
-                var currentHealth = healthController.GetHealth();
+                var currentHealth = healthController.GetCurrentHealth();
 
                 if (currentHealth >= twentyPercent)
                 {

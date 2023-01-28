@@ -18,7 +18,7 @@ namespace Health
         public Action onDeath;
         public Action onUpdateHealthDisplay;
     
-        public float GetHealth() => _currentHealth;
+        public float GetCurrentHealth() => _currentHealth;
 
         public float GetMaxHealth() => maxHealth;
 
