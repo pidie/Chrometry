@@ -2,17 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-/* HEALTH
- * 
- * The Health system has three parts. This - the Health component - is the operational part, storing and updating all information.
- * It should be placed on the root object. There should only be one health component for each game unit.
- * 
- * The HealthColliderController detects objects that would alter data stored in the Health section. It should be placed anywhere collisions
- * will be detected. There can be multiple HealthColliderControllers for one Health, but there must always be at least one to enable interaction.
- * 
- * The optional HealthDisplayUI allows Health data to be shown in the UI. This is only important if the health of the unit needs to be visualized.
- */
-
 namespace Health
 {
     public class HealthController : MonoBehaviour
@@ -44,7 +33,7 @@ namespace Health
         private void Awake()
         {
             _currentHealth = maxHealth;
-            onUpdateHealthDisplay.Invoke();
+            onUpdateHealthDisplay?.Invoke();
         }
 
         private void Update()
@@ -65,6 +54,9 @@ namespace Health
                 _canRegen = false;
                 StopAllCoroutines();
                 StartCoroutine(HealthRegenDelay());
+
+                if (_currentHealth < 0)
+                    onDeath.Invoke();
             }
         
             onUpdateHealthDisplay.Invoke();
