@@ -1,3 +1,4 @@
+using Player;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,7 +11,7 @@ namespace Data.Scripts
         public Sprite icon;
         public UnityEvent functions;
         [Tooltip("Used for the Score Multiplier item")]
-        public float multiplier;
+        public float scoreMultiplier;
         [TextArea(5,10)]
         public string description;
     }

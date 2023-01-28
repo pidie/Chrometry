@@ -63,7 +63,8 @@ namespace ObjectControllers
         public void Interact()
         {
             PlayerController.onAddItemToPlayer.Invoke(data);
-            Destroy(gameObject);   
+            if (gameObject)
+                Destroy(gameObject);   
         }
     }
 }

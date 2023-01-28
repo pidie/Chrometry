@@ -30,6 +30,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  multiplier: 0
-  description: restores between 15-40% of missing health, based on missing health.
-    At 0 health, restores 40%. At 70 or more health, restores 15%.
+  scoreMultiplier: 0
+  description: restores 15-40% of missing health, based on missing health. At 0 health,
+    restores 40%. At 70 or more health, restores 15%.

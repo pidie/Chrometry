@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 150
+  currentHealthOverride: 0
   healthRegen: 2.5
   healthRegenDelay: 2.5
 --- !u!114 &4523481812093393652

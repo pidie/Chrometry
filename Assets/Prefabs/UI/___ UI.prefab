@@ -337,7 +337,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e118a3d8f054579498263edb465a4bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthController: {fileID: 0}
+  healthController: {fileID: 7795745147805508631, guid: 059415e3cdf46424193309814bac24b7,
+    type: 3}
   maxHealthColor: {r: 0, g: 1, b: 0, a: 1}
   minHealthColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &6118793837039697353

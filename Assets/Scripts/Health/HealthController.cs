@@ -8,6 +8,7 @@ namespace Health
     {
         [Header("Stats")]
         [SerializeField] private float maxHealth = 100f;
+        [SerializeField] private float currentHealthOverride;
         [SerializeField, Tooltip("Health regenerated per second")] private float healthRegen = 1.5f;
         [SerializeField, Tooltip("Delay after taking damage before health will regenerate")] private float healthRegenDelay = 2.5f;
 
@@ -30,7 +31,11 @@ namespace Health
                 _currentHealth = maxHealth;
         }
     
-        private void Awake() => _currentHealth = maxHealth;
+        private void Awake()
+        {
+            _currentHealth = currentHealthOverride < maxHealth ? currentHealthOverride : maxHealth;
+            onUpdateHealthDisplay?.Invoke();
+        }
 
         private void Update()
         {

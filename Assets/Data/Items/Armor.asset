@@ -17,5 +17,5 @@ MonoBehaviour:
   functions:
     m_PersistentCalls:
       m_Calls: []
-  multiplier: 0
-  description: Grants 750 Armor
+  scoreMultiplier: 0
+  description: Grants 75 Armor

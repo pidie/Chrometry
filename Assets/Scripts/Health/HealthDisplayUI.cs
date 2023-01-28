@@ -12,13 +12,14 @@ namespace Health
         [SerializeField] private Color minHealthColor;
         
         private TMP_Text _text;
+        [Tooltip("Image used for the player's health")]
         private Image _iconPlayer;
+        [Tooltip("Image used for non-player health bars")]  
         private Image _icon;
 
         private void Awake()
         {
             _text = GetComponent<TMP_Text>();
-
             if (_text == null)
                 _text = GetComponentInChildren<TMP_Text>();
 
@@ -57,7 +58,10 @@ namespace Health
                     _iconPlayer.color = Color.Lerp(minHealthColor, maxHealthColor, percentage);
                 }
                 else
+                {
                     _iconPlayer.fillAmount = currentHealth / twentyPercent;
+                    _iconPlayer.color = minHealthColor;
+                }
             }
         }
     }
