@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e113661aa519d7d4ba944ef7475ee507, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: 
+  damageMin: 3
+  damageMax: 4.5
+  timeBetweenShots: 0.3
+  range: 60
+  projectileSpeed: 1
+  projectile: {fileID: 11400000, guid: e8a548d31ed76b140ac209a55e91024b, type: 2}
+  model: {fileID: 122648, guid: 68d90d84e69a6914ab8ff70f2984fb24, type: 3}

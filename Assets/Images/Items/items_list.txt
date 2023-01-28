@@ -1,0 +1,7 @@
+Active Cloak - a purple hood
+Armor - a yellow shield
+Health - a green cross
+Omnigun - a white gun
+Pacify - a pink heart
+Score Multiplier - an orange number
+Shield - a cyan bubble
