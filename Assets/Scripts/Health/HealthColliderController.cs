@@ -3,6 +3,7 @@ using Weapons;
 
 namespace Health
 {
+    [RequireComponent(typeof(Collider))]
     public class HealthColliderController : MonoBehaviour
     {
         [SerializeField] private float damageModifier = 1f;
