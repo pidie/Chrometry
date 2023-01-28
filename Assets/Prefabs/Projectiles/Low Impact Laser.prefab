@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8033313157521134373}
   - component: {fileID: 188822119632976488}
   - component: {fileID: 7696019952765160299}
+  - component: {fileID: 5551898155648627036}
   m_Layer: 0
   m_Name: Low Impact Laser
   m_TagString: Untagged
@@ -64,6 +65,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5551898155648627036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8033313157521134375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de560588eeed314888904acc9262efa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  willCriticallyHit: 0
 --- !u!1 &8033313158803247525
 GameObject:
   m_ObjectHideFlags: 0
