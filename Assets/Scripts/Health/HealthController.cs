@@ -30,11 +30,7 @@ namespace Health
                 _currentHealth = maxHealth;
         }
     
-        private void Awake()
-        {
-            _currentHealth = maxHealth;
-            onUpdateHealthDisplay?.Invoke();
-        }
+        private void Awake() => _currentHealth = maxHealth;
 
         private void Update()
         {
@@ -42,7 +38,7 @@ namespace Health
             if (_currentHealth < maxHealth && _canRegen)
             {
                 _currentHealth += healthRegen * Time.deltaTime;
-                onUpdateHealthDisplay.Invoke();
+                onUpdateHealthDisplay?.Invoke();
             }
         }
 
@@ -59,7 +55,7 @@ namespace Health
                     onDeath.Invoke();
             }
         
-            onUpdateHealthDisplay.Invoke();
+            onUpdateHealthDisplay?.Invoke();
         }
 
         public void UpdateMaxHealth(float value) => maxHealth += value;
