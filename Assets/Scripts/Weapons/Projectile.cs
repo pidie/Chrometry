@@ -1,8 +1,9 @@
+using Interfaces;
 using UnityEngine;
 
 namespace Weapons
 {
-    public class Projectile : MonoBehaviour
+    public class Projectile : MonoBehaviour, IDamager
     {
         public float MaxDistance { get; set; }
         public float ProjectileSpeed { get; set; }

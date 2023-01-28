@@ -31,7 +31,7 @@ namespace Weapons
 
             // create the projectile
             var projectileGo = Instantiate(gunMod.projectile.model, muzzle.transform.position, quaternion.identity);
-            var projectile = projectileGo.AddComponent<Projectile>();
+            var projectile = projectileGo.GetComponent<Projectile>();
             projectileGo.transform.rotation = transform.rotation;
             
             // store data in the projectile
