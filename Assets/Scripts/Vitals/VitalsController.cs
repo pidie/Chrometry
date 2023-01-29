@@ -54,10 +54,7 @@ namespace Vitals
             currentValue += value;
             if (value < 0)
             {
-                canRegen = false;
-                StopAllCoroutines();
-                StartCoroutine(RegenDelay());
-
+                RestartRegenCountdown();
                 RefreshColliderEnabledStates();
             }
 
