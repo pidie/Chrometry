@@ -5,13 +5,36 @@ file_version: 1.1.1
 app_version: 1.0.20
 ---
 
+# Metrics
+
 The vitals system is built out of classes that govern an entity's metrics. Currently, those metrics are _health_, _armor_, and _shields_, with _energy_ on the way.
 
-> An entity is an actor or structure that makes use of vitals.
+*   **_Health_** is an entity's hit points. Once this value reaches 0, the entity is considered killed or destroyed. Health will usually regenerate slowly over time.
+    
+*   **_Armor_** is a barrier for health. Damage to armor is reduced by 30%. Armor does not regenerate.
+    
+*   **_Shields_** produce a protective field around an entity, taking damage before health or shields. They do however have an energy cost to maintain, and an increased energy cost when recharging. When unpowered, shields will slowly decay and take from 10% to 75% bonus damage, increasing as the shields value decreases.
+    
+*   **_Energy_** is used by entities to power their abilities. Energy will usually regenerate slowly over time. Most entities that use energy will have a battery that can store energy.
+    
+
+> _An entity is an actor or structure that makes use of vitals._
 
 <br/>
 
-~~The health system uses three main components - `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:7:5:5:`    public class HealthController : MonoBehaviour`"/>, `HealthColliderController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:8:5:5:`    public class HealthColliderController : MonoBehaviour`"/>, and `HealthDisplayUI`<swm-token data-swm-token=":Assets/Scripts/Health/HealthDisplayUI.cs:8:5:5:`    public class HealthDisplayUI : MonoBehaviour`"/>. All three classes are located at `📄 Assets/Scripts/Health`.~~
+# Components
+
+The core of the vitals system is the VitalsController, an abstract class that stores and manipulates metric data. Each subclass is responsible for a single metric.
+
+The VitalsColliderController is a component that requires a Collider. Once linked to a VitalsController, it detects any relevant collisions and calls the VitalsController to update its data. The VitalsColliderController takes a reference to a VitalsController via the Inspector, so these components do not need to be on the same game object. Each VitalsColliderController can only be hooked up to one VitalsController at a time, but a single VitalsController can have multiple VitalsColliderControllers hooked up to it.
+
+The VitalsDisplayUI is an abstract class requiring an Image (from UnityEngine.UI). It controls the UI element responsible for its VitalsController's metric. Each subclass handles its metrics differently.
+
+<br/>
+
+# Old
+
+~~The health system uses three main components - `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:7:5:5:`    public class HealthController : MonoBehaviour`"/>, `HealthColliderController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:8:5:5:`    public class HealthColliderController : MonoBehaviour`"/>, and `HealthDisplayUI`<swm-token data-swm-token=":Assets/Scripts/Health/HealthDisplayUI.cs:8:5:5:`    public class HealthDisplayUI : MonoBehaviour`"/>. All three classes are located at `📄 Assets/Scripts/Health`.
 
 <br/>
 
