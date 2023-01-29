@@ -11,9 +11,7 @@ namespace Vitals
             currentValue += value;
             if (value < 0)
             {
-                canRegen = false;
-                StopAllCoroutines();
-                StartCoroutine(RegenDelay());
+                RestartRegenCountdown();
 
                 if (currentValue < 0)
                     onDeath.Invoke();
