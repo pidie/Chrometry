@@ -39,23 +39,16 @@ Serialized Fields
 
 <br/>
 
-<br/>
-
 Private Fields
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/ArmorController.cs
 ```c#
 9              private HealthController _healthController;
-10             private float _startingArmor;
 ```
 
 <br/>
 
-`_healthController`<swm-token data-swm-token=":Assets/Scripts/Vitals/ArmorController.cs:9:5:5:`        private HealthController _healthController;`"/> - a reference to a `HealthController`<swm-token data-swm-token=":Assets/Scripts/Vitals/ArmorController.cs:9:3:3:`        private HealthController _healthController;`"/><br/>
-\- how much armor the entity starts with
-
-*   `_startingArmor`<swm-token data-swm-token=":Assets/Scripts/Vitals/ArmorController.cs:10:5:5:`        private float _startingArmor;`"/> is redundant, as this functionality is handled in `VitalsController`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`"/> by `currentValueOverride`.
-    
+`_healthController`<swm-token data-swm-token=":Assets/Scripts/Vitals/ArmorController.cs:9:5:5:`        private HealthController _healthController;`"/> - a reference to a `HealthController`<swm-token data-swm-token=":Assets/Scripts/Vitals/ArmorController.cs:9:3:3:`        private HealthController _healthController;`"/>
 
 <br/>
 
@@ -63,16 +56,15 @@ Private Fields
 
 <br/>
 
-saves a reference to the `HealthController`<swm-token data-swm-token=":Assets/Scripts/Vitals/ArmorController.cs:14:7:7:`            _healthController = GetComponent&lt;HealthController&gt;();`"/>.
+saves a reference to the `HealthController`<swm-token data-swm-token=":Assets/Scripts/Vitals/ArmorController.cs:13:7:7:`            _healthController = GetComponent&lt;HealthController&gt;();`"/>.
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/ArmorController.cs
 ```c#
-12             protected override void Awake()
-13             {
-14                 _healthController = GetComponent<HealthController>();
-15                 base.Awake();
-16                 currentValue = _startingArmor;
-17             }
+11             protected override void Awake()
+12             {
+13                 _healthController = GetComponent<HealthController>();
+14                 base.Awake();
+15             }
 ```
 
 <br/>
