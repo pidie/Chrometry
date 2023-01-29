@@ -15,13 +15,8 @@ namespace Vitals
 
         protected float currentValue;
         protected bool canRegen;
-        
-        // todo : convert these lists to a dictionary
-        // protected List<VitalsColliderController> colliderControllersList = new ();
-        // protected List<bool> colliderEnabledStates = new ();
-
         protected Dictionary<VitalsColliderController, bool> colliderControllers =
-            new Dictionary<VitalsColliderController, bool>();
+            new ();
 
         public Action onUpdateDisplay;
         public Action<bool> onToggleCollider;
