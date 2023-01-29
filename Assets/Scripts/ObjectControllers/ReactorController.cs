@@ -1,17 +1,18 @@
 using Data.Scripts;
 using Interfaces;
 using UnityEngine;
+using Vitals;
 
 namespace ObjectControllers
 {
     public class ReactorController : MonoBehaviour, IDestructable
     {
-        [SerializeField] private Health.HealthController healthController;
+        [SerializeField] private HealthController healthController;
     
         public DestructableData data;
         public float StructureHealth { get; set; }
 
-        private void Awake() => healthController.SetMaxHealth(data.structureHealth);
+        private void Awake() => healthController.SetMaxValue(data.structureHealth);
 
         private void OnEnable() => healthController.onDeath += OnDeath;
 

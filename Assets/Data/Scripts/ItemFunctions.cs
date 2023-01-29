@@ -1,5 +1,6 @@
 using Player;
 using UnityEngine;
+using Vitals;
 
 namespace Data.Scripts
 {
@@ -10,35 +11,60 @@ namespace Data.Scripts
         [SerializeField] private float minHealthPercentageHealed;
         [SerializeField] private float maxHealthPercentageHealed;
 
-        private PlayerController _playerController;
+        [Header("Armor")] 
+        [SerializeField] private float armorAdded;
+
+        [Header("Shield")] 
+        [SerializeField] private float shieldAdded;
+
+        private static PlayerController _playerController;
+        private static float _minHealthPercentageHealed;
+        private static float _maxHealthPercentageHealed;
+        private static float _armorAdded;
+        private static float _shieldAdded;
 
         private void Awake()
         {
             _playerController = GameObject.Find("*** ACTORS").GetComponentInChildren<PlayerController>();
+            _minHealthPercentageHealed = minHealthPercentageHealed;
+            _maxHealthPercentageHealed = maxHealthPercentageHealed;
+            _armorAdded = armorAdded;
+            _shieldAdded = shieldAdded;
         }
 
         public void IncreaseHealth()
         {
-            var healthController = _playerController.GetComponent<Health.HealthController>();
-            var maxHealth = healthController.GetMaxHealth();
-            var currentHealth = healthController.GetCurrentHealth();
+            var healthController = _playerController.GetComponent<HealthController>();
+            var maxHealth = healthController.MaxValue;
+            var currentHealth = healthController.CurrentValue;
             var amountToHeal = 0f;
 
             if (currentHealth >= maxHealth * 0.7f)
-                amountToHeal = maxHealth * minHealthPercentageHealed * 0.01f;
+                amountToHeal = maxHealth * _minHealthPercentageHealed * 0.01f;
             else
             {
-                amountToHeal = Mathf.Lerp(maxHealthPercentageHealed, minHealthPercentageHealed,
+                amountToHeal = Mathf.Lerp(_maxHealthPercentageHealed, _minHealthPercentageHealed,
                     currentHealth / (maxHealth * 0.7f));
             }
 
-            healthController.UpdateHealth(amountToHeal);
+            healthController.UpdateValue(amountToHeal);
             print($"Player gained {amountToHeal} health.");
         }
 
         public void AddArmor()
         {
+            var armorController = _playerController.GetComponent<ArmorController>();
+            armorController.UpdateValue(_armorAdded);
             
+            print($"Player received {_armorAdded} armor.");
+        }
+
+        public void AddShield()
+        {
+            var shieldController = _playerController.GetComponent<ShieldController>();
+            shieldController.UpdateValue(_shieldAdded);
+            
+            print($"Player received {_shieldAdded} shield.");
         }
     }
 }
