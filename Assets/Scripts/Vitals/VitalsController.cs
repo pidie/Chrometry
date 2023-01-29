@@ -17,8 +17,11 @@ namespace Vitals
         protected bool canRegen;
         
         // todo : convert these lists to a dictionary
-        protected List<VitalsColliderController> colliderControllers = new ();
-        protected List<bool> colliderEnabledStates = new ();
+        // protected List<VitalsColliderController> colliderControllersList = new ();
+        // protected List<bool> colliderEnabledStates = new ();
+
+        protected Dictionary<VitalsColliderController, bool> colliderControllers =
+            new Dictionary<VitalsColliderController, bool>();
 
         public Action onUpdateDisplay;
         public Action<bool> onToggleCollider;
@@ -82,33 +85,31 @@ namespace Vitals
 
         public void RegisterColliderToController(VitalsColliderController colliderController)
         {
-            if (colliderControllers.Contains(colliderController)) return;
+            if (colliderControllers.ContainsKey(colliderController)) return;
             
-            colliderControllers.Add(colliderController);
-            colliderEnabledStates.Add(colliderController.GetColliderEnabledState());
+            colliderControllers.Add(colliderController, colliderController.GetColliderEnabledState());
         }
 
         public void SetColliderEnabled(VitalsColliderController colliderController)
         {
-            for (var i = 0; i < colliderControllers.Count; i++)
+            foreach (var key in colliderControllers.Keys)
             {
-                if (colliderControllers[i] == colliderController)
+                if (key == colliderController)
                 {
-                    colliderEnabledStates[i] = colliderController.GetColliderEnabledState();
+                    colliderControllers[key] = colliderController.GetColliderEnabledState();
                     return;
                 }
             }
             
-            colliderControllers.Add(colliderController);
-            colliderEnabledStates.Add(colliderController.GetColliderEnabledState());
-            print($"added new VitalsColliderController {colliderController} with a value of {colliderEnabledStates[^1]}");
+            colliderControllers.Add(colliderController, colliderController.GetColliderEnabledState());
+            print($"added new VitalsColliderController {colliderController} with a value of {colliderControllers[colliderController]}");
         }
 
         /// <summary>
         /// Returns true if any registered colliders are enabled.
         /// </summary>
         /// <returns></returns>
-        public bool QueryColliderIsEnabled() => colliderEnabledStates.Any(state => state);
+        public bool QueryColliderIsEnabled() => colliderControllers.Values.Any(value => value);
 
         /// <summary>
         /// Returns the amount of time since the last collision registered to this controller.
@@ -117,18 +118,13 @@ namespace Vitals
         public float QueryLastCollision()
         {
             var shortestTime = Mathf.Infinity;
-            VitalsColliderController colliderController = default;
-            
-            foreach (var t in colliderControllers)
+
+            foreach (var key in colliderControllers.Keys)
             {
-                if (t.TimeSinceLastCollision < shortestTime)
-                {
-                    shortestTime = t.TimeSinceLastCollision;
-                    colliderController = t;
-                }
+                if (key.TimeSinceLastCollision < shortestTime)
+                    shortestTime = key.TimeSinceLastCollision;
             }
 
-            print($"{shortestTime}: {colliderController.gameObject.name}");
             return shortestTime;
         }
         
@@ -141,8 +137,11 @@ namespace Vitals
 
         protected void RefreshColliderEnabledStates()
         {
-            for (var i = 0; i < colliderControllers.Count; i++)
-                colliderEnabledStates[i] = colliderControllers[i].GetColliderEnabledState();
+            var registeredColliders = colliderControllers.Keys;
+            colliderControllers.Clear();
+
+            foreach (var colliderController in registeredColliders)
+                colliderControllers.Add(colliderController, colliderController.GetColliderEnabledState());
         }
     }
 }
