@@ -5,36 +5,32 @@ file_version: 1.1.1
 app_version: 1.0.20
 ---
 
-The `HealthColliderController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:6:5:5:`    public class HealthColliderController : MonoBehaviour`"/> detects collisions that could affect the `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/>. It references a `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> and activates events for it.<br/>
+The `HealthColliderController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:8:5:5:`    public class HealthColliderController : MonoBehaviour`"/> detects collisions that could affect the `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:7:5:5:`    public class HealthController : MonoBehaviour`"/>. It references a `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:7:5:5:`    public class HealthController : MonoBehaviour`"/> and activates events for it.<br/>
 
 ## Fields
 
-`damageModifier`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:8:9:9:`        [SerializeField] private float damageModifier = 1f;`"/> - a multiplier for damage detected by this collider
+`damageModifier`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:10:9:9:`        [SerializeField] private float damageModifier = 1f;`"/> - a multiplier for damage detected by this collider
 
-`healthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:9:9:9:`        [SerializeField] private HealthController healthController;`"/> - the `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> reference for this instance
-
-<br/>
+`healthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:11:9:9:`        [SerializeField] private HealthController healthController;`"/> - the `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:7:5:5:`    public class HealthController : MonoBehaviour`"/> reference for this instance
 
 ## Functions
 
-`OnTriggerEnter`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:11:5:5:`        private void OnTriggerEnter(Collider other)`"/> - if the collision was a `projectile`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:13:3:3:`            var projectile = other.gameObject.GetComponent&lt;Projectile&gt;();`"/>, calls `HandleProjectileCollision`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:25:5:5:`        private void HandleProjectileCollision(Projectile projectile)`"/>.
+`OnTriggerEnter`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:13:5:5:`        private void OnTriggerEnter(Collider other)`"/> - if the collision was a `projectile`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:15:3:3:`            var projectile = other.gameObject.GetComponent&lt;Projectile&gt;();`"/>, calls `HandleIDamagerCollision`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:33:5:5:`        private void HandleIDamagerCollision(IDamager damager)`"/>.
 
-`OnCollisionEnter`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:18:5:5:`        private void OnCollisionEnter(Collision collision)`"/> - if the collision was a `projectile`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:20:3:3:`            var projectile = collision.gameObject.GetComponent&lt;Projectile&gt;();`"/>, calls `HandleProjectileCollision`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:25:5:5:`        private void HandleProjectileCollision(Projectile projectile)`"/>.
+`OnCollisionEnter`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:21:5:5:`        private void OnCollisionEnter(Collision collision)`"/> - if the collision was a `projectile`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:23:3:3:`            var projectile = collision.gameObject.GetComponent&lt;Projectile&gt;();`"/>, calls `HandleIDamagerCollision`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:33:5:5:`        private void HandleIDamagerCollision(IDamager damager)`"/>.
 
-`HandleProjectileCollision`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:25:5:5:`        private void HandleProjectileCollision(Projectile projectile)`"/> - takes a `Projectile`<swm-token data-swm-token=":Assets/Scripts/Weapons/Projectile.cs:5:5:5:`    public class Projectile : MonoBehaviour`"/>.
+`HandleIDamagerCollision`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:33:5:5:`        private void HandleIDamagerCollision(IDamager damager)`"/> - takes a `Projectile`<swm-token data-swm-token=":Assets/Scripts/Weapons/Projectile.cs:6:5:5:`    public class Projectile : MonoBehaviour, IDamager`"/>.
 
-*   calls the `UpdateHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:60:5:5:`        public void UpdateHealth(float value)`"/> method of the `healthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:9:9:9:`        [SerializeField] private HealthController healthController;`"/>
+*   calls the `UpdateHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:50:5:5:`        public void UpdateHealth(float value)`"/> method of the `healthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:11:9:9:`        [SerializeField] private HealthController healthController;`"/>
     
-*   calls the `CollideWithObject`<swm-token data-swm-token=":Assets/Scripts/Weapons/Projectile.cs:29:5:5:`        public void CollideWithObject() =&gt; Destroy(gameObject);`"/> method of the `projectile`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:25:9:9:`        private void HandleProjectileCollision(Projectile projectile)`"/>
+*   calls the `CollideWithObject`<swm-token data-swm-token=":Assets/Scripts/Weapons/Projectile.cs:30:5:5:`        public void CollideWithObject() =&gt; Destroy(gameObject);`"/> method of the damager
     
-
-<br/>
 
 ## Notes
 
-*   There can be multiple `HealthColliderController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:6:5:5:`    public class HealthColliderController : MonoBehaviour`"/>s for one `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/>
+*   There can be multiple `HealthColliderController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:8:5:5:`    public class HealthColliderController : MonoBehaviour`"/>s for one `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:7:5:5:`    public class HealthController : MonoBehaviour`"/>
     
-*   A single game object can have multiple `HealthColliderController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:6:5:5:`    public class HealthColliderController : MonoBehaviour`"/>s for different `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/>s, but should not have more than one for the same controller
+*   A single game object can have multiple `HealthColliderController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthColliderController.cs:8:5:5:`    public class HealthColliderController : MonoBehaviour`"/>s for different `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:7:5:5:`    public class HealthController : MonoBehaviour`"/>s, but should not have more than one for the same controller
 
 <br/>
 
