@@ -15,8 +15,7 @@ namespace Vitals
 
         protected float currentValue;
         protected bool canRegen;
-        protected Dictionary<VitalsColliderController, bool> colliderControllers =
-            new ();
+        protected Dictionary<VitalsColliderController, bool> colliderControllers = new ();
 
         public Action onUpdateDisplay;
         public Action<bool> onToggleCollider;
