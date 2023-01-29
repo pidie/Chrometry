@@ -7,13 +7,11 @@ namespace Vitals
         [SerializeField] private float damageReduction = 0.3f;
         
         private HealthController _healthController;
-        private float _startingArmor;
 
         protected override void Awake()
         {
             _healthController = GetComponent<HealthController>();
             base.Awake();
-            currentValue = _startingArmor;
         }
 
         public override void UpdateValue(float value)
@@ -37,7 +35,5 @@ namespace Vitals
             
             onUpdateDisplay?.Invoke();
         }
-
-        public void SetStartingArmor(float value) => _startingArmor = value;
     }
 }
