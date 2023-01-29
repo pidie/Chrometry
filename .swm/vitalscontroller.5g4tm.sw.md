@@ -9,13 +9,9 @@ app_version: 1.0.20
 
 The `VitalsController`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`"/> is an abstract class for tracking a metric, with a subclass for each metric. All actors and structures that make use of vitals (collectively called _entities_) will have a component that inherits from this class.
 
-<br/>
-
 ## Purpose
 
 The `VitalsController`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`"/> grants essential functionality to a multitude of subclasses and dependent classes. It acts as an information hub, tracking and adjusting its values based on incoming information.
-
-<br/>
 
 # Fields and Properties
 
@@ -48,21 +44,15 @@ Protected Fields
 ```c#
 16             protected float currentValue;
 17             protected bool canRegen;
-18             
-19             // todo : convert these lists to a dictionary
-20             protected List<VitalsColliderController> colliderControllers = new ();
-21             protected List<bool> colliderEnabledStates = new ();
+18             protected Dictionary<VitalsColliderController, bool> colliderControllers =
+19                 new ();
 ```
 
 <br/>
 
 `currentValue`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:16:5:5:`        protected float currentValue;`"/> - the current value of the metric<br/>
 `canRegen`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:17:5:5:`        protected bool canRegen;`"/> - keeps track of whether or not this metric can regenerate<br/>
-`colliderControllers`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:20:8:8:`        protected List&lt;VitalsColliderController&gt; colliderControllers = new ();`"/> - a list of colliders that register to this controller<br/>
-`colliderEnabledStates`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:21:8:8:`        protected List&lt;bool&gt; colliderEnabledStates = new ();`"/> - a list of Boolean values that reflect the enabled state of the colliders in `colliderControllers`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:20:8:8:`        protected List&lt;VitalsColliderController&gt; colliderControllers = new ();`"/>
-
-*   _`colliderControllers`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:20:8:8:`        protected List&lt;VitalsColliderController&gt; colliderControllers = new ();`"/> and `colliderEnabledStates`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:21:8:8:`        protected List&lt;bool&gt; colliderEnabledStates = new ();`"/> will be combined into a Dictionary<_`VitalsColliderController`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsColliderController.cs:6:5:5:`    public class VitalsColliderController : MonoBehaviour`"/>_, bool>_
-    
+`colliderControllers`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:18:11:11:`        protected Dictionary&lt;VitalsColliderController, bool&gt; colliderControllers =`"/> - a collection of collider controllers that register to this controller and the enabled state of the collider components
 
 <br/>
 
@@ -72,14 +62,14 @@ Actions
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/VitalsController.cs
 ```c#
-23             public Action onUpdateDisplay;
-24             public Action<bool> onToggleCollider;
+21             public Action onUpdateDisplay;
+22             public Action<bool> onToggleCollider;
 ```
 
 <br/>
 
-`onUpdateDisplay`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:23:5:5:`        public Action onUpdateDisplay;`"/> - invoked when the UI display needs to be updated<br/>
-`onToggleCollider`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:24:8:8:`        public Action&lt;bool&gt; onToggleCollider;`"/> - invoked when a registered collider should be toggled on or off - passing `true` enabled the collider
+`onUpdateDisplay`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:21:5:5:`        public Action onUpdateDisplay;`"/> - invoked when the UI display needs to be updated<br/>
+`onToggleCollider`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:22:8:8:`        public Action&lt;bool&gt; onToggleCollider;`"/> - invoked when a registered collider should be toggled on or off - passing `true` enabled the collider
 
 <br/>
 
@@ -89,8 +79,8 @@ Public Accessors
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/VitalsController.cs
 ```c#
-26             public float CurrentValue => currentValue;
-27             public float MaxValue => maxValue;
+24             public float CurrentValue => currentValue;
+25             public float MaxValue => maxValue;
 ```
 
 <br/>
@@ -103,19 +93,19 @@ Below, find each method and a brief explanation of what it does.
 
 <br/>
 
-Sets the `maxValue`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:11:9:9:`        [SerializeField] protected float maxValue;`"/> to whatever the `value`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:29:9:9:`        public void SetMaxValue(float value, bool maxOutCurrentValue = true, bool increaseCurrentValue = false)`"/> is and adjusts the `currentValue`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:16:5:5:`        protected float currentValue;`"/> as needed.
+Sets the `maxValue`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:11:9:9:`        [SerializeField] protected float maxValue;`"/> to whatever the `value`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:27:9:9:`        public void SetMaxValue(float value, bool maxOutCurrentValue = true, bool increaseCurrentValue = false)`"/> is and adjusts the `currentValue`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:16:5:5:`        protected float currentValue;`"/> as needed.
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/VitalsController.cs
 ```c#
-29             public void SetMaxValue(float value, bool maxOutCurrentValue = true, bool increaseCurrentValue = false)
-30             {
-31                 maxValue = value;
-32     
-33                 if (maxOutCurrentValue)
-34                     currentValue = maxValue;
-35                 else if (increaseCurrentValue)
-36                     UpdateValue(value);
-37             }
+27             public void SetMaxValue(float value, bool maxOutCurrentValue = true, bool increaseCurrentValue = false)
+28             {
+29                 maxValue = value;
+30     
+31                 if (maxOutCurrentValue)
+32                     currentValue = maxValue;
+33                 else if (increaseCurrentValue)
+34                     UpdateValue(value);
+35             }
 ```
 
 <br/>
@@ -124,11 +114,11 @@ Sets the `currentValue`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsC
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/VitalsController.cs
 ```c#
-39             protected virtual void Awake()
-40             {
-41                 currentValue = currentValueOverride < maxValue ? maxValue : currentValueOverride;
-42                 onUpdateDisplay?.Invoke();
-43             }
+37             protected virtual void Awake()
+38             {
+39                 currentValue = currentValueOverride < maxValue ? maxValue : currentValueOverride;
+40                 onUpdateDisplay?.Invoke();
+41             }
 ```
 
 <br/>
@@ -137,37 +127,37 @@ Regenerates the metric and ensures it doesn't exceed the `maxValue`<swm-token da
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/VitalsController.cs
 ```c#
-45             protected void Update()
-46             {
-47                 if (currentValue > maxValue) currentValue = maxValue;
-48                 if (currentValue < maxValue && canRegen)
-49                 {
-50                     currentValue += vitalRegen * Time.deltaTime;
-51                     onUpdateDisplay?.Invoke();
-52                 }
-53             }
+43             protected void Update()
+44             {
+45                 if (currentValue > maxValue) currentValue = maxValue;
+46                 if (currentValue < maxValue && canRegen)
+47                 {
+48                     currentValue += vitalRegen * Time.deltaTime;
+49                     onUpdateDisplay?.Invoke();
+50                 }
+51             }
 ```
 
 <br/>
 
-Adds the `value`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:55:11:11:`        public virtual void UpdateValue(float value)`"/> to the `currentValue`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:16:5:5:`        protected float currentValue;`"/>, stopping regeneration if `value`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:55:11:11:`        public virtual void UpdateValue(float value)`"/> is negative and calling to update the UI display.
+Adds the `value`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:53:11:11:`        public virtual void UpdateValue(float value)`"/> to the `currentValue`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:16:5:5:`        protected float currentValue;`"/>, stopping regeneration if `value`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:53:11:11:`        public virtual void UpdateValue(float value)`"/> is negative and calling to update the UI display.
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/VitalsController.cs
 ```c#
-55             public virtual void UpdateValue(float value)
-56             {            
-57                 currentValue += value;
-58                 if (value < 0)
-59                 {
-60                     canRegen = false;
-61                     StopAllCoroutines();
-62                     StartCoroutine(RegenDelay());
-63     
-64                     RefreshColliderEnabledStates();
-65                 }
-66     
-67                 onUpdateDisplay?.Invoke();
-68             }
+53             public virtual void UpdateValue(float value)
+54             {            
+55                 currentValue += value;
+56                 if (value < 0)
+57                 {
+58                     canRegen = false;
+59                     StopAllCoroutines();
+60                     StartCoroutine(RegenDelay());
+61     
+62                     RefreshColliderEnabledStates();
+63                 }
+64     
+65                 onUpdateDisplay?.Invoke();
+66             }
 ```
 
 <br/>
@@ -176,25 +166,25 @@ Updates the `maxValue`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsCo
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/VitalsController.cs
 ```c#
-70             public void UpdateMaxValue(float value) => maxValue += value;
+68             public void UpdateMaxValue(float value) => maxValue += value;
 ```
 
 <br/>
 
-If the entity has not recently taken damage (defined by `vitalRegenDelay`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:74:17:17:`            if (!QueryColliderIsEnabled() &amp;&amp; QueryLastCollision() &lt; vitalRegenDelay) `"/>), `canRegen`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:17:5:5:`        protected bool canRegen;`"/> is set to `true`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:79:5:5:`                canRegen = true;`"/>.
+If the entity has not recently taken damage (defined by `vitalRegenDelay`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:72:17:17:`            if (!QueryColliderIsEnabled() &amp;&amp; QueryLastCollision() &lt; vitalRegenDelay) `"/>), `canRegen`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:17:5:5:`        protected bool canRegen;`"/> is set to `true`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:77:5:5:`                canRegen = true;`"/>.
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/VitalsController.cs
 ```c#
-72             protected IEnumerator RegenDelay()
-73             {
-74                 if (!QueryColliderIsEnabled() && QueryLastCollision() < vitalRegenDelay) 
-75                     yield return null;
-76                 else
-77                 {
-78                     yield return new WaitForSeconds(vitalRegenDelay);
-79                     canRegen = true;
-80                 }
-81             }
+70             protected IEnumerator RegenDelay()
+71             {
+72                 if (!QueryColliderIsEnabled() && QueryLastCollision() < vitalRegenDelay) 
+73                     yield return null;
+74                 else
+75                 {
+76                     yield return new WaitForSeconds(vitalRegenDelay);
+77                     canRegen = true;
+78                 }
+79             }
 ```
 
 <br/>
@@ -203,13 +193,12 @@ A `VitalsColliderController`<swm-token data-swm-token=":Assets/Scripts/Vitals/Vi
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/VitalsController.cs
 ```c#
-83             public void RegisterColliderToController(VitalsColliderController colliderController)
-84             {
-85                 if (colliderControllers.Contains(colliderController)) return;
-86                 
-87                 colliderControllers.Add(colliderController);
-88                 colliderEnabledStates.Add(colliderController.GetColliderEnabledState());
-89             }
+81             public void RegisterColliderToController(VitalsColliderController colliderController)
+82             {
+83                 if (colliderControllers.ContainsKey(colliderController)) return;
+84                 
+85                 colliderControllers.Add(colliderController, colliderController.GetColliderEnabledState());
+86             }
 ```
 
 <br/>
@@ -218,21 +207,20 @@ Adjusts the enabled state of the given `VitalsColliderController`<swm-token data
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/VitalsController.cs
 ```c#
-91             public void SetColliderEnabled(VitalsColliderController colliderController)
-92             {
-93                 for (var i = 0; i < colliderControllers.Count; i++)
-94                 {
-95                     if (colliderControllers[i] == colliderController)
-96                     {
-97                         colliderEnabledStates[i] = colliderController.GetColliderEnabledState();
-98                         return;
-99                     }
-100                }
-101                
-102                colliderControllers.Add(colliderController);
-103                colliderEnabledStates.Add(colliderController.GetColliderEnabledState());
-104                print($"added new VitalsColliderController {colliderController} with a value of {colliderEnabledStates[^1]}");
-105            }
+88             public void SetColliderEnabled(VitalsColliderController colliderController)
+89             {
+90                 foreach (var key in colliderControllers.Keys)
+91                 {
+92                     if (key == colliderController)
+93                     {
+94                         colliderControllers[key] = colliderController.GetColliderEnabledState();
+95                         return;
+96                     }
+97                 }
+98                 
+99                 colliderControllers.Add(colliderController, colliderController.GetColliderEnabledState());
+100                print($"added new VitalsColliderController {colliderController} with a value of {colliderControllers[colliderController]}");
+101            }
 ```
 
 <br/>
@@ -241,7 +229,7 @@ Returns true if any registered colliders are enabled.
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/VitalsController.cs
 ```c#
-111            public bool QueryColliderIsEnabled() => colliderEnabledStates.Any(state => state);
+107            public bool QueryColliderIsEnabled() => colliderControllers.Values.Any(value => value);
 ```
 
 <br/>
@@ -250,23 +238,18 @@ Returns the amount of time since a registered collider has detected a collision.
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/VitalsController.cs
 ```c#
-117            public float QueryLastCollision()
-118            {
-119                var shortestTime = Mathf.Infinity;
-120                VitalsColliderController colliderController = default;
-121                
-122                foreach (var t in colliderControllers)
-123                {
-124                    if (t.TimeSinceLastCollision < shortestTime)
-125                    {
-126                        shortestTime = t.TimeSinceLastCollision;
-127                        colliderController = t;
-128                    }
-129                }
-130    
-131                print($"{shortestTime}: {colliderController.gameObject.name}");
-132                return shortestTime;
-133            }
+113            public float QueryLastCollision()
+114            {
+115                var shortestTime = Mathf.Infinity;
+116    
+117                foreach (var key in colliderControllers.Keys)
+118                {
+119                    if (key.TimeSinceLastCollision < shortestTime)
+120                        shortestTime = key.TimeSinceLastCollision;
+121                }
+122    
+123                return shortestTime;
+124            }
 ```
 
 <br/>
@@ -275,12 +258,12 @@ A cluster of functionality that resets the timer for regeneration of this metric
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/VitalsController.cs
 ```c#
-135            protected void RestartRegenCountdown()
-136            {
-137                canRegen = false;
-138                StopAllCoroutines();
-139                StartCoroutine(RegenDelay());
-140            }
+126            protected void RestartRegenCountdown()
+127            {
+128                canRegen = false;
+129                StopAllCoroutines();
+130                StartCoroutine(RegenDelay());
+131            }
 ```
 
 <br/>
@@ -289,11 +272,14 @@ Forces every registered collider to cache its enabled state.
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/VitalsController.cs
 ```c#
-142            protected void RefreshColliderEnabledStates()
-143            {
-144                for (var i = 0; i < colliderControllers.Count; i++)
-145                    colliderEnabledStates[i] = colliderControllers[i].GetColliderEnabledState();
-146            }
+133            protected void RefreshColliderEnabledStates()
+134            {
+135                var registeredColliders = colliderControllers.Keys;
+136                colliderControllers.Clear();
+137    
+138                foreach (var colliderController in registeredColliders)
+139                    colliderControllers.Add(colliderController, colliderController.GetColliderEnabledState());
+140            }
 ```
 
 <br/>
