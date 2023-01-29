@@ -5,66 +5,64 @@ file_version: 1.1.1
 app_version: 1.0.20
 ---
 
-The `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> is the brain of the health system. There should only be one `HealthController`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:18:5:5:`    public class HealthController : MonoBehaviour`"/> for any entity with a trackable health.<br/>
+# Overview
 
-## Fields
+The `HealthController`<swm-token data-swm-token=":Assets/Scripts/Vitals/HealthController.cs:5:5:5:`    public class HealthController : VitalsController`"/> inherits from the `VitalsController`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`"/> class, so much of its functionality can be found there. Its special characteristics revolve around the death of the entity.
 
-`maxHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:21:9:9:`        [SerializeField] private float maxHealth = 100f;`"/> - stores the max health the entity has.
+<br/>
 
-`healthRegen`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:22:23:23:`        [SerializeField, Tooltip(&quot;Health regenerated per second&quot;)] private float healthRegen = 1.5f;`"/> - how much health per second should be regenerated.
+## Of Note
 
-`healthRegenDelay`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:23:31:31:`        [SerializeField, Tooltip(&quot;Delay after taking damage before health will regenerate&quot;)] private float healthRegenDelay = 2.5f;`"/> - how many seconds after taking damage until health can be regenerated.
-
-`_currentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:25:5:5:`        private float _currentHealth;`"/> - the current health of the entity.
-
-`_canRegen`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:26:5:5:`        private bool _canRegen;`"/> - tracks whether or not to regenerate health.
-
-`onDeath`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:29:5:5:`        public Action onDeath;`"/> - invoked when the entity's health drops below 0.
-
-`onUpdateHealthDisplay`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:30:5:5:`        public Action onUpdateHealthDisplay;`"/> - invoked when the `_currentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:25:5:5:`        private float _currentHealth;`"/> has changed and the UI needs to update.<br/>
-
-## Functions
-
-`GetHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:32:5:5:`        public float GetHealth() =&gt; _currentHealth;`"/> - returns the value of `_currentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:25:5:5:`        private float _currentHealth;`"/>
-
-`GetMaxHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:34:5:5:`        public float GetMaxHealth() =&gt; maxHealth;`"/> - returns the value of `maxHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:21:9:9:`        [SerializeField] private float maxHealth = 100f;`"/>
-
-`SetMaxHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:36:5:5:`        public void SetMaxHealth(float value, bool updateCurrentHealth = true)`"/> - takes a float (`value`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:36:9:9:`        public void SetMaxHealth(float value, bool updateCurrentHealth = true)`"/>) and a bool (`updateCurrentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:36:14:14:`        public void SetMaxHealth(float value, bool updateCurrentHealth = true)`"/>).
-
-*   `maxHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:21:9:9:`        [SerializeField] private float maxHealth = 100f;`"/> will be set to `value`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:36:9:9:`        public void SetMaxHealth(float value, bool updateCurrentHealth = true)`"/>
+*   An entity is considered any actor or structure that uses vitals.
     
-*   If `updateCurrentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:36:14:14:`        public void SetMaxHealth(float value, bool updateCurrentHealth = true)`"/> is true, `_currentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:25:5:5:`        private float _currentHealth;`"/> will also increase by `value`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:36:9:9:`        public void SetMaxHealth(float value, bool updateCurrentHealth = true)`"/>
+*   While a structure whose health has been dropped to 0 might be thought of as _destroyed_ rather than _killed_, the word `Destroy` has a special meaning in Unity, referring to the destruction of an in-scene game object.
     
-*   `value`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:36:9:9:`        public void SetMaxHealth(float value, bool updateCurrentHealth = true)`"/>is set to `true`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:36:18:18:`        public void SetMaxHealth(float value, bool updateCurrentHealth = true)`"/> by default.
+*   As such, all entities whose health has been dropped to or below 0 will be referred to as _killed_ or _dead_.
     
 
-`Awake`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:44:5:5:`        private void Awake()`"/> - sets `_currentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:25:5:5:`        private float _currentHealth;`"/> to equal `maxHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:21:9:9:`        [SerializeField] private float maxHealth = 100f;`"/> and invokes `onUpdateHealthDisplay`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:30:5:5:`        public Action onUpdateHealthDisplay;`"/>.
+<br/>
 
-`Update`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:50:5:5:`        private void Update()`"/> - continually check the status of `_currentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:25:5:5:`        private float _currentHealth;`"/>
+# Fields and Properties
 
-*   if `_currentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:25:5:5:`        private float _currentHealth;`"/> is greater than `maxHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:21:9:9:`        [SerializeField] private float maxHealth = 100f;`"/>, sets `_currentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:25:5:5:`        private float _currentHealth;`"/> equal to it instead
-    
-*   if `_currentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:25:5:5:`        private float _currentHealth;`"/> is less than `maxHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:21:9:9:`        [SerializeField] private float maxHealth = 100f;`"/> and `_canRegen`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:26:5:5:`        private bool _canRegen;`"/> is true, `_currentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:25:5:5:`        private float _currentHealth;`"/> increases and `onUpdateHealthDisplay`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:30:5:5:`        public Action onUpdateHealthDisplay;`"/> is invoked.
-    
+<br/>
 
-`UpdateHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:60:5:5:`        public void UpdateHealth(float value)`"/> - takes in a float (`value`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:60:9:9:`        public void UpdateHealth(float value)`"/>)
+<br/>
 
-*   increase `_currentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:25:5:5:`        private float _currentHealth;`"/> by `value`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:60:9:9:`        public void UpdateHealth(float value)`"/>
-    
-*   if `value`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:60:9:9:`        public void UpdateHealth(float value)`"/> is less than 0:
-    
-    *   set `_canRegen`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:26:5:5:`        private bool _canRegen;`"/> to false
-        
-    *   restart the `HealthRegenDelay`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:75:5:5:`        private IEnumerator HealthRegenDelay()`"/> coroutine
-        
-    *   if `_currentHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:25:5:5:`        private float _currentHealth;`"/> is less than 0, invoke `onDeath`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:29:5:5:`        public Action onDeath;`"/>
-        
-*   invoke `onUpdateHealthDisplay`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:30:5:5:`        public Action onUpdateHealthDisplay;`"/>
-    
+Public Actions
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 Assets/Scripts/Vitals/HealthController.cs
+```c#
+7              public Action onDeath;
+```
 
-`UpdateMaxHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:73:5:5:`        public void UpdateMaxHealth(float value) =&gt; maxHealth += value;`"/> - takes in a float (`value`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:73:9:9:`        public void UpdateMaxHealth(float value) =&gt; maxHealth += value;`"/>) and increases `maxHealth`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:21:9:9:`        [SerializeField] private float maxHealth = 100f;`"/> by that value.
+<br/>
 
-`HealthRegenDelay`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:75:5:5:`        private IEnumerator HealthRegenDelay()`"/> - waits for `healthRegenDelay`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:23:31:31:`        [SerializeField, Tooltip(&quot;Delay after taking damage before health will regenerate&quot;)] private float healthRegenDelay = 2.5f;`"/> seconds and then sets `_canRegen`<swm-token data-swm-token=":Assets/Scripts/Health/HealthController.cs:26:5:5:`        private bool _canRegen;`"/> to true.
+`onDeath`<swm-token data-swm-token=":Assets/Scripts/Vitals/HealthController.cs:7:5:5:`        public Action onDeath;`"/> - called when this entity dies
+
+<br/>
+
+# Methods
+
+<br/>
+
+Updates the metric for this vital and checks to see if the change has killed this entity, then updates the display UI.
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 Assets/Scripts/Vitals/HealthController.cs
+```c#
+9              public override void UpdateValue(float value)
+10             {
+11                 currentValue += value;
+12                 if (value < 0)
+13                 {
+14                     RestartRegenCountdown();
+15     
+16                     if (currentValue < 0)
+17                         onDeath.Invoke();
+18                 }
+19     
+20                 onUpdateDisplay?.Invoke();
+21             }
+```
 
 <br/>
 
