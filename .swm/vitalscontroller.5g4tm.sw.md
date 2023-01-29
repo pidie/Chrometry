@@ -36,8 +36,6 @@ Serialized Fields
 
 <br/>
 
-<br/>
-
 Protected Fields
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/VitalsController.cs
@@ -55,8 +53,6 @@ Protected Fields
 
 <br/>
 
-<br/>
-
 Actions
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/VitalsController.cs
@@ -69,8 +65,6 @@ Actions
 
 `onUpdateDisplay`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:20:5:5:`        public Action onUpdateDisplay;`"/> - invoked when the UI display needs to be updated<br/>
 `onToggleCollider`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:21:8:8:`        public Action&lt;bool&gt; onToggleCollider;`"/> - invoked when a registered collider should be toggled on or off - passing `true` enabled the collider
-
-<br/>
 
 <br/>
 
