@@ -30,7 +30,7 @@ The `VitalsDisplayUI`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDis
 
 The dependency chart below gives a brief overview of the contents of each of these components and those that inherit from them. It should be noted that for the sake of this diagram, methods that inherit from UnityEngine have been omitted. A more thorough explanation will be included in each dedicated component page and will include the functionality of said omitted methods.
 
-<br/>
+Click on a class to learn more.
 
 <br/>
 
@@ -46,8 +46,7 @@ classDiagram
 `VitalsController` <|-- `ArmorController` : Inheritance
 `VitalsController` <|-- `ShieldController` : Inheritance
 `VitalsDisplayUI` <|-- `HealthDisplayUI` : Inheritance
-`VitalsDisplayUI` <|-- ArmorShieldDisplayUI : Inheritance
-
+`VitalsDisplayUI` <|-- `ArmorShieldDisplayUI` : Inheritance
 <<Abstract>> `VitalsController`
 class `VitalsController`{
 #float maxValue
@@ -55,15 +54,12 @@ class `VitalsController`{
 #float vitalRegen
 #float vitalRegenDelay
 #bool canRegen
-#List~`VitalsColliderController`~ colliderControllers
-#List~bool~ colliderEnabledStates
-
+#List`VitalsColliderController` colliderControllers
+#Listbool colliderEnabledStates
 +Action onUpdateDisplay
-+Action~bool~ onToggleCollider
-
++Actionbool onToggleCollider
 +float CurrentValue
 +float MaxValue
-
 +SetMaxValue(float, bool = true, bool = false)
 +UpdateValue(float)
 +UpdateMaxValue(float)
@@ -75,18 +71,15 @@ class `VitalsController`{
 #RestartRegenCountdown()
 #RefreshColliderEnabledStates()
 }
-
 class `VitalsColliderController`{
 #float damageMultiplier
 #`VitalsController` vitalsController
 #Collider \_collider
 +float `TimeSinceLastCollision`
-
 #ToggleCollider(bool)
 #HandleIDamagerCollision(IDamager)
 +GetColliderEnabledState() bool
 }
-
 <<Abstract>> `VitalsDisplayUI`
 class `VitalsDisplayUI` {
 #`VitalsController` vitalsController
@@ -95,23 +88,19 @@ class `VitalsDisplayUI` {
 #TMP\_Text text
 #Image iconPlayer
 #Image icon
-
 #UpdateDisplay()$
 }
-
 class `HealthController` {
 +Action onDeath
-`UpdateValue`(float)$
++UpdateValue(float)$
 }
-
 class `ArmorController` {
 \-float damageReduction
-\-`HealthController` \_healthController_
-_\-float \_startingArmor
+\-`HealthController` \_healthController\_
+\_-float \_startingArmor
 +UpdateValue(float)$
 +SetStartingArmor(float)
 }
-
 class `ShieldController` {
 \-`HealthController` \_healthController
 \-`ArmorController` \_armorController
@@ -119,16 +108,16 @@ class `ShieldController` {
 +UpdateValue(float)$
 +SetStartingShield(float)
 }
-
 class `HealthDisplayUI`{
 UpdateDisplay()$
 }
-
 class `ArmorShieldDisplayUI` {
 `UpdateDisplay()`$
 }
+
+click `VitalsController` href "[https://app.swimm.io/workspaces/xk0cIoHAkoKXsgB3KRFl/repos/Z2l0aHViJTNBJTNBQ2hyb21ldHJ5JTNBJTNBcGlkaWU=/branch/master/docs/5g4tm](https://app.swimm.io/workspaces/xk0cIoHAkoKXsgB3KRFl/repos/Z2l0aHViJTNBJTNBQ2hyb21ldHJ5JTNBJTNBcGlkaWU=/branch/master/docs/5g4tm)"
 ```
-<!--MCONTENT {content: "\\---<br/>\ntitle: Dependency Chart<br/>\n\\---<br/>\nclassDiagram<br/>\n`VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/> <.. `VitalsColliderController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsColliderController.cs:6:5:5:`    public class VitalsColliderController : MonoBehaviour`\"/> : Dependency<br/>\n`VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/> <.. `VitalsDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsDisplayUI.cs:8:7:7:`\tpublic abstract class VitalsDisplayUI : MonoBehaviour`\"/> : Dependency<br/>\n`VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/> <|-- `HealthController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/HealthController.cs:5:5:5:`    public class HealthController : VitalsController`\"/> : Inheritance<br/>\n`VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/> <|-- `ArmorController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/ArmorController.cs:5:5:5:`    public class ArmorController : VitalsController`\"/> : Inheritance<br/>\n`VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/> <|-- `ShieldController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/ShieldController.cs:3:5:5:`    public class ShieldController : VitalsController`\"/> : Inheritance<br/>\n`VitalsDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsDisplayUI.cs:8:7:7:`\tpublic abstract class VitalsDisplayUI : MonoBehaviour`\"/> <|-- `HealthDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/HealthDisplayUI.cs:5:5:5:`    public class HealthDisplayUI : VitalsDisplayUI`\"/> : Inheritance<br/>\n`VitalsDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsDisplayUI.cs:8:7:7:`\tpublic abstract class VitalsDisplayUI : MonoBehaviour`\"/> <|-- ArmorShieldDisplayUI : Inheritance<br/>\n\n<<Abstract>> `VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/><br/>\nclass `VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/>{<br/>\n#float maxValue<br/>\n#float currentValueOverride<br/>\n#float vitalRegen<br/>\n#float vitalRegenDelay<br/>\n#bool canRegen<br/>\n#List~`VitalsColliderController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsColliderController.cs:6:5:5:`    public class VitalsColliderController : MonoBehaviour`\"/>~ colliderControllers<br/>\n#List~bool~ colliderEnabledStates\n\n+Action onUpdateDisplay<br/>\n+Action~bool~ onToggleCollider\n\n+float CurrentValue<br/>\n+float MaxValue\n\n+SetMaxValue(float, bool = true, bool = false)<br/>\n+UpdateValue(float)<br/>\n+UpdateMaxValue(float)<br/>\n#RegenDelay() IEnumerator<br/>\n+RegisterColliderToController(`VitalsColliderController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsColliderController.cs:6:5:5:`    public class VitalsColliderController : MonoBehaviour`\"/>)<br/>\n+SetColliderEnabled(`VitalsColliderController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsColliderController.cs:6:5:5:`    public class VitalsColliderController : MonoBehaviour`\"/>)<br/>\n+QueryColliderIsEnabled() bool<br/>\n+QueryLastCollision() float<br/>\n#RestartRegenCountdown()<br/>\n#RefreshColliderEnabledStates()<br/>\n}\n\nclass `VitalsColliderController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsColliderController.cs:6:5:5:`    public class VitalsColliderController : MonoBehaviour`\"/>{<br/>\n#float damageMultiplier<br/>\n#`VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/> vitalsController<br/>\n#Collider \\_collider<br/>\n+float `TimeSinceLastCollision`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsColliderController.cs:13:5:5:`        public float TimeSinceLastCollision { get; private set; }`\"/>\n\n#ToggleCollider(bool)<br/>\n#HandleIDamagerCollision(IDamager)<br/>\n+GetColliderEnabledState() bool<br/>\n}\n\n<<Abstract>> `VitalsDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsDisplayUI.cs:8:7:7:`\tpublic abstract class VitalsDisplayUI : MonoBehaviour`\"/><br/>\nclass `VitalsDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsDisplayUI.cs:8:7:7:`\tpublic abstract class VitalsDisplayUI : MonoBehaviour`\"/> {<br/>\n#`VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/> vitalsController<br/>\n#Color maxHealthColor<br/>\n#Color minHealthColor<br/>\n#TMP\\_Text text<br/>\n#Image iconPlayer<br/>\n#Image icon\n\n#UpdateDisplay()$<br/>\n}\n\nclass `HealthController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/HealthController.cs:5:5:5:`    public class HealthController : VitalsController`\"/> {<br/>\n+Action onDeath<br/>\n`UpdateValue`<swm-token data-swm-token=\":Assets/Scripts/Vitals/HealthController.cs:9:7:7:`        public override void UpdateValue(float value)`\"/>(float)$<br/>\n}\n\nclass `ArmorController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/ArmorController.cs:5:5:5:`    public class ArmorController : VitalsController`\"/> {<br/>\n\\-float damageReduction<br/>\n\\-`HealthController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/HealthController.cs:5:5:5:`    public class HealthController : VitalsController`\"/> \\_healthController_<br/>\n_\\-float \\_startingArmor<br/>\n+UpdateValue(float)$<br/>\n+SetStartingArmor(float)<br/>\n}\n\nclass `ShieldController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/ShieldController.cs:3:5:5:`    public class ShieldController : VitalsController`\"/> {<br/>\n\\-`HealthController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/HealthController.cs:5:5:5:`    public class HealthController : VitalsController`\"/> \\_healthController<br/>\n\\-`ArmorController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/ArmorController.cs:5:5:5:`    public class ArmorController : VitalsController`\"/> \\_armorController<br/>\n\\-float \\_startingShield<br/>\n+UpdateValue(float)$<br/>\n+SetStartingShield(float)<br/>\n}\n\nclass `HealthDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/HealthDisplayUI.cs:5:5:5:`    public class HealthDisplayUI : VitalsDisplayUI`\"/>{<br/>\nUpdateDisplay()$<br/>\n}\n\nclass `ArmorShieldDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/ArmorShieldDisplayUI.cs:3:5:5:`\tpublic class ArmorShieldDisplayUI : VitalsDisplayUI`\"/> {<br/>\n`UpdateDisplay()`<swm-token data-swm-token=\":Assets/Scripts/Vitals/ArmorShieldDisplayUI.cs:5:7:9:`\t\tprotected override void UpdateDisplay()`\"/>$<br/>\n}"} --->
+<!--MCONTENT {content: "\\---<br/>\ntitle: Dependency Chart<br/>\n\\---<br/>\nclassDiagram<br/>\n`VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/> <.. `VitalsColliderController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsColliderController.cs:6:5:5:`    public class VitalsColliderController : MonoBehaviour`\"/> : Dependency<br/>\n`VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/> <.. `VitalsDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsDisplayUI.cs:8:7:7:`\tpublic abstract class VitalsDisplayUI : MonoBehaviour`\"/> : Dependency<br/>\n`VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/> <|-- `HealthController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/HealthController.cs:5:5:5:`    public class HealthController : VitalsController`\"/> : Inheritance<br/>\n`VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/> <|-- `ArmorController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/ArmorController.cs:5:5:5:`    public class ArmorController : VitalsController`\"/> : Inheritance<br/>\n`VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/> <|-- `ShieldController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/ShieldController.cs:3:5:5:`    public class ShieldController : VitalsController`\"/> : Inheritance<br/>\n`VitalsDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsDisplayUI.cs:8:7:7:`\tpublic abstract class VitalsDisplayUI : MonoBehaviour`\"/> <|-- `HealthDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/HealthDisplayUI.cs:5:5:5:`    public class HealthDisplayUI : VitalsDisplayUI`\"/> : Inheritance<br/>\n`VitalsDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsDisplayUI.cs:8:7:7:`\tpublic abstract class VitalsDisplayUI : MonoBehaviour`\"/> <|-- `ArmorShieldDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/ArmorShieldDisplayUI.cs:3:5:5:`\tpublic class ArmorShieldDisplayUI : VitalsDisplayUI`\"/> : Inheritance<br/>\n<<Abstract>> `VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/><br/>\nclass `VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/>{<br/>\n#float maxValue<br/>\n#float currentValueOverride<br/>\n#float vitalRegen<br/>\n#float vitalRegenDelay<br/>\n#bool canRegen<br/>\n#List`VitalsColliderController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsColliderController.cs:6:5:5:`    public class VitalsColliderController : MonoBehaviour`\"/> colliderControllers<br/>\n#Listbool colliderEnabledStates<br/>\n+Action onUpdateDisplay<br/>\n+Actionbool onToggleCollider<br/>\n+float CurrentValue<br/>\n+float MaxValue<br/>\n+SetMaxValue(float, bool = true, bool = false)<br/>\n+UpdateValue(float)<br/>\n+UpdateMaxValue(float)<br/>\n#RegenDelay() IEnumerator<br/>\n+RegisterColliderToController(`VitalsColliderController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsColliderController.cs:6:5:5:`    public class VitalsColliderController : MonoBehaviour`\"/>)<br/>\n+SetColliderEnabled(`VitalsColliderController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsColliderController.cs:6:5:5:`    public class VitalsColliderController : MonoBehaviour`\"/>)<br/>\n+QueryColliderIsEnabled() bool<br/>\n+QueryLastCollision() float<br/>\n#RestartRegenCountdown()<br/>\n#RefreshColliderEnabledStates()<br/>\n}<br/>\nclass `VitalsColliderController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsColliderController.cs:6:5:5:`    public class VitalsColliderController : MonoBehaviour`\"/>{<br/>\n#float damageMultiplier<br/>\n#`VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/> vitalsController<br/>\n#Collider \\_collider<br/>\n+float `TimeSinceLastCollision`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsColliderController.cs:13:5:5:`        public float TimeSinceLastCollision { get; private set; }`\"/><br/>\n#ToggleCollider(bool)<br/>\n#HandleIDamagerCollision(IDamager)<br/>\n+GetColliderEnabledState() bool<br/>\n}<br/>\n<<Abstract>> `VitalsDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsDisplayUI.cs:8:7:7:`\tpublic abstract class VitalsDisplayUI : MonoBehaviour`\"/><br/>\nclass `VitalsDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsDisplayUI.cs:8:7:7:`\tpublic abstract class VitalsDisplayUI : MonoBehaviour`\"/> {<br/>\n#`VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/> vitalsController<br/>\n#Color maxHealthColor<br/>\n#Color minHealthColor<br/>\n#TMP\\_Text text<br/>\n#Image iconPlayer<br/>\n#Image icon<br/>\n#UpdateDisplay()$<br/>\n}<br/>\nclass `HealthController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/HealthController.cs:5:5:5:`    public class HealthController : VitalsController`\"/> {<br/>\n+Action onDeath<br/>\n+UpdateValue(float)$<br/>\n}<br/>\nclass `ArmorController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/ArmorController.cs:5:5:5:`    public class ArmorController : VitalsController`\"/> {<br/>\n\\-float damageReduction<br/>\n\\-`HealthController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/HealthController.cs:5:5:5:`    public class HealthController : VitalsController`\"/> \\_healthController\\_<br/>\n\\_-float \\_startingArmor<br/>\n+UpdateValue(float)$<br/>\n+SetStartingArmor(float)<br/>\n}<br/>\nclass `ShieldController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/ShieldController.cs:3:5:5:`    public class ShieldController : VitalsController`\"/> {<br/>\n\\-`HealthController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/HealthController.cs:5:5:5:`    public class HealthController : VitalsController`\"/> \\_healthController<br/>\n\\-`ArmorController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/ArmorController.cs:5:5:5:`    public class ArmorController : VitalsController`\"/> \\_armorController<br/>\n\\-float \\_startingShield<br/>\n+UpdateValue(float)$<br/>\n+SetStartingShield(float)<br/>\n}<br/>\nclass `HealthDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/HealthDisplayUI.cs:5:5:5:`    public class HealthDisplayUI : VitalsDisplayUI`\"/>{<br/>\nUpdateDisplay()$<br/>\n}<br/>\nclass `ArmorShieldDisplayUI`<swm-token data-swm-token=\":Assets/Scripts/Vitals/ArmorShieldDisplayUI.cs:3:5:5:`\tpublic class ArmorShieldDisplayUI : VitalsDisplayUI`\"/> {<br/>\n`UpdateDisplay()`<swm-token data-swm-token=\":Assets/Scripts/Vitals/ArmorShieldDisplayUI.cs:5:7:9:`\t\tprotected override void UpdateDisplay()`\"/>$<br/>\n}\n\nclick `VitalsController`<swm-token data-swm-token=\":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`\"/> href \"[https://app.swimm.io/workspaces/xk0cIoHAkoKXsgB3KRFl/repos/Z2l0aHViJTNBJTNBQ2hyb21ldHJ5JTNBJTNBcGlkaWU=/branch/master/docs/5g4tm](https://app.swimm.io/workspaces/xk0cIoHAkoKXsgB3KRFl/repos/Z2l0aHViJTNBJTNBQ2hyb21ldHJ5JTNBJTNBcGlkaWU=/branch/master/docs/5g4tm)\""} --->
 
 <br/>
 
