@@ -302,7 +302,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fc15ddfb414ad888ac49f9173e1e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vitalsController: {fileID: 0}
+  vitalsController: {fileID: 4370534597985821750, guid: 059415e3cdf46424193309814bac24b7,
+    type: 3}
   maxHealthColor: {r: 0, g: 0, b: 0, a: 0}
   minHealthColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!222 &2132494591788608011
@@ -394,7 +395,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fc15ddfb414ad888ac49f9173e1e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vitalsController: {fileID: 0}
+  vitalsController: {fileID: 1617566152263650939, guid: 059415e3cdf46424193309814bac24b7,
+    type: 3}
   maxHealthColor: {r: 0, g: 0, b: 0, a: 0}
   minHealthColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!222 &3644740250398375223
@@ -694,9 +696,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6118793836617207474}
+  - component: {fileID: 6118793836617207475}
   - component: {fileID: 6118793836617207473}
   - component: {fileID: 6118793836617207472}
-  - component: {fileID: 6118793836617207475}
   m_Layer: 0
   m_Name: Health
   m_TagString: Untagged
@@ -724,6 +726,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6118793836617207475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6118793836617207477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e118a3d8f054579498263edb465a4bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vitalsController: {fileID: 7795745147805508631, guid: 059415e3cdf46424193309814bac24b7,
+    type: 3}
+  maxHealthColor: {r: 1, g: 0, b: 1, a: 1}
+  minHealthColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!222 &6118793836617207473
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -762,21 +780,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6118793836617207475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6118793836617207477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e118a3d8f054579498263edb465a4bc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vitalsController: {fileID: 0}
-  maxHealthColor: {r: 1, g: 0, b: 1, a: 1}
-  minHealthColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &6118793837039697353
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,6 +912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41944fa8e82378c418990cf02f389415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseImage: {fileID: 0}
 --- !u!114 &5685889644966238885
 MonoBehaviour:
   m_ObjectHideFlags: 0

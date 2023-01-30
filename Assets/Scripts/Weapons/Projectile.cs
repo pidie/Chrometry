@@ -9,15 +9,12 @@ namespace Weapons
         public float ProjectileSpeed { get; set; }
         public Vector3 Direction { get; set; }
         public float Damage { get; set; }
-        
-        public bool willCriticallyHit;
+        public bool WillCriticallyHit { get; set; }
+        public float CritDamageMultiplier { get; set; }
 
         private Vector3 _initialPosition;
 
-        private void Awake()
-        {
-            _initialPosition = transform.position;
-        }
+        private void Awake() => _initialPosition = transform.position;
 
         private void FixedUpdate()
         {

@@ -55,7 +55,11 @@ namespace Vitals
 
         protected void HandleIDamagerCollision(Interfaces.IDamager damager)
         {
-            vitalsController.UpdateValue(damager.Damage * -1f * damageMultiplier);
+            var damage = damager.Damage;
+            if (damager.WillCriticallyHit)
+                damage *= damager.CritDamageMultiplier;
+            
+            vitalsController.UpdateValue(damage * -1f * damageMultiplier);
             damager.CollideWithObject();
         }
 

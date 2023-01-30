@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0828a6ded24683f4d90351c4eaf946bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageModifier: 1
+  damageMultiplier: 1
   vitalsController: {fileID: 7795745147805508631}
 --- !u!64 &2665770404840271608
 MeshCollider:
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0828a6ded24683f4d90351c4eaf946bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageModifier: 1
+  damageMultiplier: 1
   vitalsController: {fileID: 1617566152263650939}
 --- !u!64 &7053311452009504453
 MeshCollider:
@@ -117,7 +117,7 @@ MeshCollider:
   m_GameObject: {fileID: 2400190002707296128}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -299,10 +299,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd10da61a604e74db2226ac0bb4542d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxValue: 0
-  currentValueOverride: 0
-  valueRegen: 0
-  valueRegenDelay: 0
+  maxValue: 150
+  currentValueOverride: -1
+  vitalRegen: 5
+  vitalRegenDelay: 5
 --- !u!114 &1617566152263650939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,10 +315,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 786bd8512bed15d42ab4aba44be0551b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxValue: 0
+  maxValue: 75
   currentValueOverride: 0
-  valueRegen: 0
-  valueRegenDelay: 0
+  vitalRegen: 0
+  vitalRegenDelay: 0
+  damagePercentageMitigated: 0.3
 --- !u!114 &4370534597985821750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,10 +332,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec8e3bd098176543920f6bc923d8ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxValue: 0
+  maxValue: 100
   currentValueOverride: 0
-  valueRegen: 0
-  valueRegenDelay: 0
+  vitalRegen: 8
+  vitalRegenDelay: 3
 --- !u!114 &4523481812093393652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -648,7 +649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0828a6ded24683f4d90351c4eaf946bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageModifier: 1
+  damageMultiplier: 1
   vitalsController: {fileID: 4370534597985821750}
 --- !u!64 &4817943805062825623
 MeshCollider:
@@ -659,7 +660,7 @@ MeshCollider:
   m_GameObject: {fileID: 8487553140374602769}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30

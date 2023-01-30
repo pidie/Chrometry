@@ -1,5 +1,6 @@
 using Data.Scripts;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -39,10 +40,23 @@ namespace Weapons
             projectile.ProjectileSpeed = gunMod.projectileSpeed;
             projectile.Direction = direction;
 
-            projectile.willCriticallyHit = _critChance >= Random.Range(0f, 100f);
+            if (_critChance >= Random.Range(0f, 100f))
+            {
+                projectile.WillCriticallyHit = true;
+                var pfx = Instantiate(gunMod.criticalHitParticleEffect, projectile.transform);
+                pfx.transform.position = projectile.transform.position;
+                pfx.transform.rotation = projectile.transform.rotation;
+                // var light = projectile.AddComponent<Light>();
+                // light.type = LightType.Point;
+                // light.intensity = 10 * _critDamageMultiplier;
+                // light.color = Color.red;
+                // light.transform.position = projectile.transform.position;
+                // light.transform.parent = projectile.transform;
+            }
+            projectile.CritDamageMultiplier = _critDamageMultiplier;
 
             var damage = Random.Range(gunMod.damageMin, gunMod.damageMax);
-            projectile.Damage = projectile.willCriticallyHit ? damage * _critDamageMultiplier : damage;
+            projectile.Damage = projectile.WillCriticallyHit ? damage * _critDamageMultiplier : damage;
         }
 
         private void SetGunMod(GunMod mod)
