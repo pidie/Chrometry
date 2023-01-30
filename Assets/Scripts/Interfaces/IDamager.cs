@@ -7,5 +7,6 @@
 		public float CritDamageMultiplier { get; set; }
 
 		public void CollideWithObject();
+		public void SetIsInDamagerCollider(bool value);
 	}
 }

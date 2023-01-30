@@ -2,7 +2,7 @@ using System.Collections;
 using Interfaces;
 using UnityEngine;
 
-namespace Weapons
+namespace Weapons.Damagers
 {
     public class ExplosionController : MonoBehaviour, IDamager
     {
@@ -58,5 +58,7 @@ namespace Weapons
         }
 
         public void CollideWithObject() { }
+        
+        public void SetIsInDamagerCollider(bool value) { }
     }
 }

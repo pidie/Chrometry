@@ -2,6 +2,7 @@ using System.Collections;
 using Data.Scripts;
 using UnityEngine;
 using Weapons;
+using Weapons.Damagers;
 
 namespace Testing
 {

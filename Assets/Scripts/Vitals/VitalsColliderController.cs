@@ -27,29 +27,45 @@ namespace Vitals
 
         protected void OnTriggerEnter(Collider other)
         {
-            print("hi");
             var damager = other.GetComponent<IDamager>();
 
             if (damager != null)
             {
-                print($"{other.gameObject.name}");
+                damager.SetIsInDamagerCollider(true);
                 TimeSinceLastCollision = 0;
                 HandleIDamagerCollision(damager);
-            }
-            else
-            {
-                print("damager is null");
             }
         }
 
-        protected void OnCollisionEnter(Collision collision)
+        protected void OnCollisionEnter(Collision other)
         {
-            var damager = collision.gameObject.GetComponent<IDamager>();
+            var damager = other.gameObject.GetComponent<IDamager>();
 
             if (damager != null)
             {
+                damager.SetIsInDamagerCollider(true);
                 TimeSinceLastCollision = 0;
                 HandleIDamagerCollision(damager);
+            }
+        }
+
+        protected void OnTriggerExit(Collider other)
+        {
+            var damager = other.GetComponent<IDamager>();
+
+            if (damager != null)
+            {
+                damager.SetIsInDamagerCollider(false);
+            }
+        }
+
+        protected void OnCollisionExit(Collision other)
+        {
+            var damager = other.gameObject.GetComponent<IDamager>();
+
+            if (damager != null)
+            {
+                damager.SetIsInDamagerCollider(false);
             }
         }
 

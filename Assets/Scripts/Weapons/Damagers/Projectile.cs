@@ -1,7 +1,7 @@
 using Interfaces;
 using UnityEngine;
 
-namespace Weapons
+namespace Weapons.Damagers
 {
     public class Projectile : MonoBehaviour, IDamager
     {
@@ -29,5 +29,7 @@ namespace Weapons
         // create overloads for different types of collisions (ie enemies, player, etc)
         // components should be able to just call projectile.Collide(this) and this script will handle the rest
         public void CollideWithObject(GameObject obj) { }
+        
+        public void SetIsInDamagerCollider(bool value) { }
     }
 }

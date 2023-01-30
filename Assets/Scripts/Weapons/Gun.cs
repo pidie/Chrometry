@@ -2,6 +2,7 @@ using System.Collections;
 using Data.Scripts;
 using Unity.Mathematics;
 using UnityEngine;
+using Weapons.Damagers;
 using Random = UnityEngine.Random;
 
 namespace Weapons
