@@ -5,6 +5,7 @@ namespace Data.Scripts
     [CreateAssetMenu(menuName = "Gun/Projectile", fileName = "New Projectile")]
     public class ProjectileData : ScriptableObject
     {
-        public GameObject model;
+        public GameObject baseModel;
+        public GameObject critModel;
     }
 }

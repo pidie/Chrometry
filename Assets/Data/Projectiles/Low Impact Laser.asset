@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d5ae07542040644a5314323204c4c3, type: 3}
   m_Name: Low Impact Laser
   m_EditorClassIdentifier: 
-  model: {fileID: 8033313157521134375, guid: 68d90d84e69a6914ab8ff70f2984fb24, type: 3}
+  baseModel: {fileID: 8033313157521134375, guid: 68d90d84e69a6914ab8ff70f2984fb24,
+    type: 3}
+  critModel: {fileID: 8033313157521134375, guid: 9b422d209999a414894a209a37bf5323,
+    type: 3}

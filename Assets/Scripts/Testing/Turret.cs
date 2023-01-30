@@ -15,7 +15,7 @@ namespace Testing
 
         private void Fire()
         {
-            var go = Instantiate(gunMod.projectile.model, muzzle.position, Quaternion.identity);
+            var go = Instantiate(gunMod.projectile.baseModel, muzzle.position, Quaternion.identity);
             var projectile = go.GetComponent<Projectile>();
             projectile.Damage = damage;
             projectile.Direction = transform.forward;

@@ -31,7 +31,9 @@ namespace Weapons
             direction.Normalize();
 
             // create the projectile
-            var projectileGo = Instantiate(gunMod.projectile.model, muzzle.transform.position, quaternion.identity);
+            var projectileGo = _critChance >= Random.Range(0f, 100f) 
+                ? Instantiate(gunMod.projectile.critModel, muzzle.transform.position, quaternion.identity) 
+                : Instantiate(gunMod.projectile.baseModel, muzzle.transform.position, quaternion.identity);
             var projectile = projectileGo.GetComponent<Projectile>();
             projectileGo.transform.rotation = transform.rotation;
             
@@ -40,19 +42,16 @@ namespace Weapons
             projectile.ProjectileSpeed = gunMod.projectileSpeed;
             projectile.Direction = direction;
 
-            if (_critChance >= Random.Range(0f, 100f))
-            {
-                projectile.WillCriticallyHit = true;
-                var pfx = Instantiate(gunMod.criticalHitParticleEffect, projectile.transform);
-                pfx.transform.position = projectile.transform.position;
-                pfx.transform.rotation = projectile.transform.rotation;
-                var light = projectile.AddComponent<Light>();
-                light.type = LightType.Point;
-                light.intensity = 10 * _critDamageMultiplier;
-                light.color = Color.red;
-                light.transform.position = projectile.transform.position;
-                light.transform.parent = projectile.transform;
-            }
+            // if (_critChance >= Random.Range(0f, 100f))
+            // {
+            //     projectile.WillCriticallyHit = true;
+            //     var light = projectile.AddComponent<Light>();
+            //     light.type = LightType.Point;
+            //     light.intensity = 10 * _critDamageMultiplier;
+            //     light.color = Color.red;
+            //     light.transform.position = projectile.transform.position;
+            //     light.transform.parent = projectile.transform;
+            // }
             projectile.CritDamageMultiplier = _critDamageMultiplier;
 
             var damage = Random.Range(gunMod.damageMin, gunMod.damageMax);

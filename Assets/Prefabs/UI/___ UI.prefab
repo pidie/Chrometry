@@ -302,8 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fc15ddfb414ad888ac49f9173e1e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vitalsController: {fileID: 4370534597985821750, guid: 059415e3cdf46424193309814bac24b7,
-    type: 3}
+  vitalsController: {fileID: 0}
   maxHealthColor: {r: 0, g: 0, b: 0, a: 0}
   minHealthColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!222 &2132494591788608011
@@ -395,8 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fc15ddfb414ad888ac49f9173e1e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vitalsController: {fileID: 1617566152263650939, guid: 059415e3cdf46424193309814bac24b7,
-    type: 3}
+  vitalsController: {fileID: 0}
   maxHealthColor: {r: 0, g: 0, b: 0, a: 0}
   minHealthColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!222 &3644740250398375223
@@ -738,8 +736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e118a3d8f054579498263edb465a4bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vitalsController: {fileID: 7795745147805508631, guid: 059415e3cdf46424193309814bac24b7,
-    type: 3}
+  vitalsController: {fileID: 0}
   maxHealthColor: {r: 1, g: 0, b: 1, a: 1}
   minHealthColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!222 &6118793836617207473
