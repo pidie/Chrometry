@@ -49,7 +49,7 @@ namespace Player
 		private GameObject _weaponWheelInstance;
 		private GravitationalForce _gravitationalForce;
 		private Gun _gun;
-		private CameraMouseSensitivityController _cameraMouseSensitivityController;
+		// private CameraMouseSensitivityController _cameraMouseSensitivityController;
 
 		public bool isHoldingItem;
 		public bool IsInRangeOfInteractable { get; set; }
@@ -69,8 +69,8 @@ namespace Player
 				_cameraLocalPosition.z);
 			_gravitationalForce = GetComponent<GravitationalForce>();
 			_gun = GetComponentInChildren<Gun>();
-			_cameraMouseSensitivityController = GetComponent<CameraMouseSensitivityController>();
-			_cameraMouseSensitivityController.UpdateMouseSensitivity(mouseSensitivity);
+			// _cameraMouseSensitivityController = GetComponent<CameraMouseSensitivityController>();
+			// _cameraMouseSensitivityController.UpdateMouseSensitivity(mouseSensitivity);
 		}
 
 		// subscribe to all events and input actions

@@ -234,7 +234,6 @@ GameObject:
   - component: {fileID: 1617566152263650939}
   - component: {fileID: 4370534597985821750}
   - component: {fileID: 4523481812093393652}
-  - component: {fileID: 1612544946627412279}
   - component: {fileID: 5230306305803143776}
   - component: {fileID: 7392289372729262968}
   - component: {fileID: 9109618523297409234}
@@ -350,19 +349,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 5230306307016154511}
   gravityMultiplier: 1
---- !u!114 &1612544946627412279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5230306305803143784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c53540fa34f69684bac81db0d50204cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 0}
 --- !u!143 &5230306305803143776
 CharacterController:
   m_ObjectHideFlags: 0

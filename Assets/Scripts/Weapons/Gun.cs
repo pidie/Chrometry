@@ -46,12 +46,12 @@ namespace Weapons
                 var pfx = Instantiate(gunMod.criticalHitParticleEffect, projectile.transform);
                 pfx.transform.position = projectile.transform.position;
                 pfx.transform.rotation = projectile.transform.rotation;
-                // var light = projectile.AddComponent<Light>();
-                // light.type = LightType.Point;
-                // light.intensity = 10 * _critDamageMultiplier;
-                // light.color = Color.red;
-                // light.transform.position = projectile.transform.position;
-                // light.transform.parent = projectile.transform;
+                var light = projectile.AddComponent<Light>();
+                light.type = LightType.Point;
+                light.intensity = 10 * _critDamageMultiplier;
+                light.color = Color.red;
+                light.transform.position = projectile.transform.position;
+                light.transform.parent = projectile.transform;
             }
             projectile.CritDamageMultiplier = _critDamageMultiplier;
 
