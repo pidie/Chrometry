@@ -1,4 +1,4 @@
-using System;
+using Interfaces;
 using UnityEngine;
 
 namespace Vitals
@@ -27,23 +27,29 @@ namespace Vitals
 
         protected void OnTriggerEnter(Collider other)
         {
-            var projectile = other.gameObject.GetComponent<Weapons.Projectile>();
+            print("hi");
+            var damager = other.GetComponent<IDamager>();
 
-            if (projectile)
+            if (damager != null)
             {
+                print($"{other.gameObject.name}");
                 TimeSinceLastCollision = 0;
-                HandleIDamagerCollision(projectile);
+                HandleIDamagerCollision(damager);
+            }
+            else
+            {
+                print("damager is null");
             }
         }
 
         protected void OnCollisionEnter(Collision collision)
         {
-            var projectile = collision.gameObject.GetComponent<Weapons.Projectile>();
+            var damager = collision.gameObject.GetComponent<IDamager>();
 
-            if (projectile)
+            if (damager != null)
             {
                 TimeSinceLastCollision = 0;
-                HandleIDamagerCollision(projectile);
+                HandleIDamagerCollision(damager);
             }
         }
 
@@ -54,7 +60,7 @@ namespace Vitals
         }
 
 
-        protected void HandleIDamagerCollision(Interfaces.IDamager damager)
+        protected void HandleIDamagerCollision(IDamager damager)
         {
             var damage = damager.Damage;
             

@@ -20,4 +20,4 @@ MonoBehaviour:
   range: 60
   projectileSpeed: 1
   projectile: {fileID: 11400000, guid: e8a548d31ed76b140ac209a55e91024b, type: 2}
-  model: {fileID: 122648, guid: 68d90d84e69a6914ab8ff70f2984fb24, type: 3}
+  model: {fileID: 5006893165754266529, guid: fc126197da5bd14478bfca96d6afd202, type: 3}

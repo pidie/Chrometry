@@ -309,6 +309,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: critical_hit_swirl_pfx
       objectReference: {fileID: 0}
+    - target: {fileID: 8040886681489068016, guid: efae804dbadd2534c82c8fcf54b38f34,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040886681489068016, guid: efae804dbadd2534c82c8fcf54b38f34,
+        type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040886681489068016, guid: efae804dbadd2534c82c8fcf54b38f34,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8164074224700909746, guid: efae804dbadd2534c82c8fcf54b38f34,
         type: 3}
       propertyPath: m_RootOrder
@@ -327,7 +342,7 @@ PrefabInstance:
     - target: {fileID: 8164074224700909746, guid: efae804dbadd2534c82c8fcf54b38f34,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 8164074224700909746, guid: efae804dbadd2534c82c8fcf54b38f34,
         type: 3}

@@ -19,7 +19,6 @@ namespace Data.Scripts
 
         [Header("Misc")] 
         public GameObject model;
-        // public ParticleSystem criticalHitParticleEffect;
 
         /*
          * things to track:

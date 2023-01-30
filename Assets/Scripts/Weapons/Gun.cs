@@ -43,11 +43,6 @@ namespace Weapons
             // create the projectile
             GameObject projectileGo;
             Projectile projectile;
-            // GameObject projectileGo = _critChance >= Random.Range(0f, 100f) 
-            //     ? Instantiate(gunMod.projectile.critModel, muzzle.transform.position, quaternion.identity) 
-            //     : Instantiate(gunMod.projectile.baseModel, muzzle.transform.position, quaternion.identity);
-            // var projectile = projectileGo.GetComponent<Projectile>();
-            // projectileGo.transform.rotation = transform.rotation;
             
             if (_critChance >= Random.Range(0f, 100f))
             {
@@ -78,8 +73,8 @@ namespace Weapons
             gunMod = mod;
             _critChance = mod.critChance;
             _critDamageMultiplier = mod.critDamageMultiplier;
-
-            var modGo = Instantiate(gunMod.model, muzzle.transform.position, Quaternion.identity, transform);
+            
+            var modGo = Instantiate(gunMod.model, _baseMuzzlePosition, Quaternion.identity, transform);
             var modController = modGo.GetComponent<GunModModelController>();
             muzzle.transform.position = modController.GetMuzzlePosition();
             
