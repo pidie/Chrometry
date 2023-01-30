@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Pacify
   m_EditorClassIdentifier: 
   itemName: Pacify
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ec03f79379868c642b48ae5ddc821b6d, type: 3}
   functions:
     m_PersistentCalls:
       m_Calls: []
-  multiplier: 0
+  scoreMultiplier: 0
   description: Pacify all enemies in a 10m radius for 6 seconds.

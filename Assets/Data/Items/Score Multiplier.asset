@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Score Multiplier
   m_EditorClassIdentifier: 
   itemName: Score Multiplier
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 70e3ce8ad01f39248a3ea97a35bcf238, type: 3}
   functions:
     m_PersistentCalls:
       m_Calls: []
-  multiplier: 0
+  scoreMultiplier: 0
   description: Multiplies your score gained during the effect by the amount listed.
     Lasts for 6 seconds.

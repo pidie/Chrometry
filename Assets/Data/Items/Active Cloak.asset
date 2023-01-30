@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Active Cloak
   m_EditorClassIdentifier: 
   itemName: Active Cloak
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 874d8401331ede14087e8d8d486ddda6, type: 3}
   functions:
     m_PersistentCalls:
       m_Calls: []
-  multiplier: 0
+  scoreMultiplier: 0
   description: Become undetectable for 5 seconds.

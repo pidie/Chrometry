@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Omnigun
   m_EditorClassIdentifier: 
   itemName: Omnigun
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 7fc280520686aee448144011afec04f8, type: 3}
   functions:
     m_PersistentCalls:
       m_Calls: []
-  multiplier: 0
+  scoreMultiplier: 0
   description: Sets the gun color to white, allowing you to shot everyone for 8 seconds.
