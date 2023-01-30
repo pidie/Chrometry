@@ -15,11 +15,9 @@ MonoBehaviour:
   damageMin: 3
   damageMax: 4.5
   critChance: 5
-  critDamageMultiplier: 1.75
+  critDamageMultiplier: 3
   timeBetweenShots: 0.3
   range: 60
   projectileSpeed: 1
   projectile: {fileID: 11400000, guid: e8a548d31ed76b140ac209a55e91024b, type: 2}
   model: {fileID: 122648, guid: 68d90d84e69a6914ab8ff70f2984fb24, type: 3}
-  criticalHitParticleEffect: {fileID: 8040886681489068016, guid: efae804dbadd2534c82c8fcf54b38f34,
-    type: 3}

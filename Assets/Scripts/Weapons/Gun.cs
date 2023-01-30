@@ -1,6 +1,6 @@
+using System.Collections;
 using Data.Scripts;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,11 +13,21 @@ namespace Weapons
 
         private float _critChance;
         private float _critDamageMultiplier;
+        private bool _canFire;
+        private Vector3 _baseMuzzlePosition;
 
-        private void Awake() => SetGunMod(gunMod);
+        private void Awake()
+        {
+            _baseMuzzlePosition = muzzle.transform.position;
+            SetGunMod(gunMod);
+        }
 
         public void Fire()
         {
+            if (!_canFire) return;
+            _canFire = false;
+            StartCoroutine(GunFireCooldown());
+            
             // check to see if the projectile will hit something
             Vector3 direction;
             UnityEngine.Physics.Raycast(transform.position, transform.forward, out var hit, gunMod.range * 5);
@@ -31,27 +41,32 @@ namespace Weapons
             direction.Normalize();
 
             // create the projectile
-            var projectileGo = _critChance >= Random.Range(0f, 100f) 
-                ? Instantiate(gunMod.projectile.critModel, muzzle.transform.position, quaternion.identity) 
-                : Instantiate(gunMod.projectile.baseModel, muzzle.transform.position, quaternion.identity);
-            var projectile = projectileGo.GetComponent<Projectile>();
+            GameObject projectileGo;
+            Projectile projectile;
+            // GameObject projectileGo = _critChance >= Random.Range(0f, 100f) 
+            //     ? Instantiate(gunMod.projectile.critModel, muzzle.transform.position, quaternion.identity) 
+            //     : Instantiate(gunMod.projectile.baseModel, muzzle.transform.position, quaternion.identity);
+            // var projectile = projectileGo.GetComponent<Projectile>();
+            // projectileGo.transform.rotation = transform.rotation;
+            
+            if (_critChance >= Random.Range(0f, 100f))
+            {
+                projectileGo = Instantiate(gunMod.projectile.critModel, muzzle.transform.position, quaternion.identity);
+                projectile = projectileGo.GetComponent<Projectile>();
+                projectile.WillCriticallyHit = true;
+            }
+            else
+            {
+                projectileGo = Instantiate(gunMod.projectile.baseModel, muzzle.transform.position, quaternion.identity);
+                projectile = projectileGo.GetComponent<Projectile>();
+            }
+            
             projectileGo.transform.rotation = transform.rotation;
             
             // store data in the projectile
             projectile.MaxDistance = gunMod.range;
             projectile.ProjectileSpeed = gunMod.projectileSpeed;
             projectile.Direction = direction;
-
-            // if (_critChance >= Random.Range(0f, 100f))
-            // {
-            //     projectile.WillCriticallyHit = true;
-            //     var light = projectile.AddComponent<Light>();
-            //     light.type = LightType.Point;
-            //     light.intensity = 10 * _critDamageMultiplier;
-            //     light.color = Color.red;
-            //     light.transform.position = projectile.transform.position;
-            //     light.transform.parent = projectile.transform;
-            // }
             projectile.CritDamageMultiplier = _critDamageMultiplier;
 
             var damage = Random.Range(gunMod.damageMin, gunMod.damageMax);
@@ -63,6 +78,19 @@ namespace Weapons
             gunMod = mod;
             _critChance = mod.critChance;
             _critDamageMultiplier = mod.critDamageMultiplier;
+
+            var modGo = Instantiate(gunMod.model, muzzle.transform.position, Quaternion.identity, transform);
+            var modController = modGo.GetComponent<GunModModelController>();
+            muzzle.transform.position = modController.GetMuzzlePosition();
+            
+            StopAllCoroutines();
+            _canFire = true;
+        }
+
+        private IEnumerator GunFireCooldown()
+        {
+            yield return new WaitForSeconds(gunMod.timeBetweenShots);
+            _canFire = true;
         }
     }
 }

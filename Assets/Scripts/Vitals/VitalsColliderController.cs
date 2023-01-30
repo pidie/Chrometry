@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Vitals
@@ -35,16 +36,16 @@ namespace Vitals
             }
         }
 
-        // protected void OnCollisionEnter(Collision collision)
-        // {
-        //     var projectile = collision.gameObject.GetComponent<Weapons.Projectile>();
-        //
-        //     if (projectile)
-        //     {
-        //         TimeSinceLastCollision = 0;
-        //         HandleIDamagerCollision(projectile);
-        //     }
-        // }
+        protected void OnCollisionEnter(Collision collision)
+        {
+            var projectile = collision.gameObject.GetComponent<Weapons.Projectile>();
+
+            if (projectile)
+            {
+                TimeSinceLastCollision = 0;
+                HandleIDamagerCollision(projectile);
+            }
+        }
 
         protected void ToggleCollider(bool value)
         {
@@ -56,6 +57,7 @@ namespace Vitals
         protected void HandleIDamagerCollision(Interfaces.IDamager damager)
         {
             var damage = damager.Damage;
+            
             if (damager.WillCriticallyHit)
                 damage *= damager.CritDamageMultiplier;
             

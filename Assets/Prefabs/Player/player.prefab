@@ -280,12 +280,10 @@ MonoBehaviour:
   runSpeedMultiplier: 1.75
   crouchSpeedMultiplier: 0.5
   jumpHeight: 2.5
-  mouseSensitivity: 1
   cameraPosition: {fileID: 5230306306972421656}
   item: {fileID: 0}
   weaponWheelCanvas: {fileID: 4481291084087814790, guid: 1d3b77f4c4fb43f4aa0088f8f26ddf5e,
     type: 3}
-  isHoldingItem: 0
 --- !u!114 &7795745147805508631
 MonoBehaviour:
   m_ObjectHideFlags: 0
