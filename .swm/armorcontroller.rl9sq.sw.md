@@ -7,8 +7,6 @@ app_version: 1.0.20
 
 The `ArmorController`<swm-token data-swm-token=":Assets/Scripts/Vitals/ArmorController.cs:5:5:5:`    public class ArmorController : VitalsController`"/> inherits from the `VitalsController`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`"/>, so much of its functionality is found there. Its special characteristics revolve around damage mitigation and tracking priority of damage.
 
-<br/>
-
 ## Of Note
 
 *   _Armor_ should take damage before _Health_, but not before _Shields_.
@@ -17,8 +15,6 @@ The `ArmorController`<swm-token data-swm-token=":Assets/Scripts/Vitals/ArmorCont
     
 *   Armor is the only vitals metric that does not regenerate over time.
     
-
-<br/>
 
 # Fields and Properties
 
@@ -50,8 +46,6 @@ Private Fields
 
 `_healthController`<swm-token data-swm-token=":Assets/Scripts/Vitals/ArmorController.cs:9:5:5:`        private HealthController _healthController;`"/> - a reference to a `HealthController`<swm-token data-swm-token=":Assets/Scripts/Vitals/ArmorController.cs:9:3:3:`        private HealthController _healthController;`"/>
 
-<br/>
-
 # Methods
 
 <br/>
@@ -69,7 +63,32 @@ saves a reference to the `HealthController`<swm-token data-swm-token=":Assets/Sc
 
 <br/>
 
-<br/>
+Updates the value based on the mitigated damage, passing leftover damage to the `_healthController`<swm-token data-swm-token=":Assets/Scripts/Vitals/ArmorController.cs:22:1:1:`                _healthController.onToggleCollider(true);`"/>.
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 Assets/Scripts/Vitals/ArmorController.cs
+```c#
+17             public override void UpdateValue(float value)
+18             {
+19                 var mitigatedValue = value * (1 - damageReduction);
+20                 if (mitigatedValue + currentValue < 0)
+21                 {
+22                     _healthController.onToggleCollider(true);
+23                     _healthController.UpdateValue(mitigatedValue + currentValue); // this grants the armor resistance to the health on the same attack
+24                     onToggleCollider.Invoke(false);
+25                     currentValue = 0;
+26                 }
+27                 else
+28                 {
+29                     currentValue += mitigatedValue;
+30                     var shieldActive = GetComponent<ShieldController>().QueryColliderIsEnabled();
+31                     print(shieldActive);
+32                     onToggleCollider.Invoke(!shieldActive);
+33                     _healthController.onToggleCollider(false);
+34                 }
+35                 
+36                 onUpdateDisplay?.Invoke();
+37             }
+```
 
 <br/>
 
