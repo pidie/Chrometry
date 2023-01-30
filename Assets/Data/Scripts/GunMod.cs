@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Data.Scripts
 {
@@ -17,6 +18,11 @@ namespace Data.Scripts
         public float projectileSpeed;
         public ProjectileData projectile;
 
+        [Header("Secondary Actions")] 
+        public UnityEvent onStarted;
+        public UnityEvent onPerformed;
+        public UnityEvent onCanceled;
+        
         [Header("Misc")] 
         public GameObject model;
 

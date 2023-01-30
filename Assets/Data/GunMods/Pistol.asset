@@ -20,4 +20,52 @@ MonoBehaviour:
   range: 60
   projectileSpeed: 1
   projectile: {fileID: 11400000, guid: e8a548d31ed76b140ac209a55e91024b, type: 2}
+  onStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5530372378670417647, guid: 4e74f46b1f4f17e489f2d3e3dc6a0751,
+          type: 3}
+        m_TargetAssemblyTypeName: Managers.GunModSecondaryManager, Assembly-CSharp
+        m_MethodName: PistolOnStarted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPerformed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5530372378670417647, guid: 4e74f46b1f4f17e489f2d3e3dc6a0751,
+          type: 3}
+        m_TargetAssemblyTypeName: Managers.GunModSecondaryManager, Assembly-CSharp
+        m_MethodName: PistolOnPerformed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onCanceled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5530372378670417647, guid: 4e74f46b1f4f17e489f2d3e3dc6a0751,
+          type: 3}
+        m_TargetAssemblyTypeName: Managers.GunModSecondaryManager, Assembly-CSharp
+        m_MethodName: PistolOnCanceled
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   model: {fileID: 5006893165754266529, guid: fc126197da5bd14478bfca96d6afd202, type: 3}

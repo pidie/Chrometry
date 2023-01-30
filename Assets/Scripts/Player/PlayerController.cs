@@ -183,12 +183,7 @@ namespace Player
 
 		private void OnFire(InputAction.CallbackContext ctx) => _gun.Fire();
 
-		private void OnSecondary(InputAction.CallbackContext ctx)
-		{
-			if		(ctx.started)	print($"secondary started");
-			else if (ctx.performed) print($"secondary performed");
-			else if (ctx.canceled)	print($"secondary canceled");
-		}
+		private void OnSecondary(InputAction.CallbackContext ctx) => _gun.Secondary(ctx);
 
 		private void OnUseItem(InputAction.CallbackContext ctx)
 		{
