@@ -1746,17 +1746,17 @@ PrefabInstance:
     - target: {fileID: 4706164049160535667, guid: adf4d41a951d4b3468a5ba7f93507f4a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.74732
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4706164049160535667, guid: adf4d41a951d4b3468a5ba7f93507f4a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.4698248
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4706164049160535667, guid: adf4d41a951d4b3468a5ba7f93507f4a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.8727627
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4706164049160535667, guid: adf4d41a951d4b3468a5ba7f93507f4a,
         type: 3}
@@ -1812,6 +1812,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5446404743640260279, guid: c620a5bcca25e864abe11315fccfbcc8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.74732
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446404743640260279, guid: c620a5bcca25e864abe11315fccfbcc8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.0328245
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446404743640260279, guid: c620a5bcca25e864abe11315fccfbcc8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.8727627
+      objectReference: {fileID: 0}
     - target: {fileID: 5446404743711524614, guid: c620a5bcca25e864abe11315fccfbcc8,
         type: 3}
       propertyPath: m_RootOrder
@@ -1871,6 +1886,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: '*** CAMERAS'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446404744104980684, guid: c620a5bcca25e864abe11315fccfbcc8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.74732
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446404744104980684, guid: c620a5bcca25e864abe11315fccfbcc8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.0328245
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446404744104980684, guid: c620a5bcca25e864abe11315fccfbcc8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.8727627
       objectReference: {fileID: 0}
     - target: {fileID: 5446404744104980687, guid: c620a5bcca25e864abe11315fccfbcc8,
         type: 3}

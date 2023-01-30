@@ -35,16 +35,16 @@ namespace Vitals
             }
         }
 
-        protected void OnCollisionEnter(Collision collision)
-        {
-            var projectile = collision.gameObject.GetComponent<Weapons.Projectile>();
-
-            if (projectile)
-            {
-                TimeSinceLastCollision = 0;
-                HandleIDamagerCollision(projectile);
-            }
-        }
+        // protected void OnCollisionEnter(Collision collision)
+        // {
+        //     var projectile = collision.gameObject.GetComponent<Weapons.Projectile>();
+        //
+        //     if (projectile)
+        //     {
+        //         TimeSinceLastCollision = 0;
+        //         HandleIDamagerCollision(projectile);
+        //     }
+        // }
 
         protected void ToggleCollider(bool value)
         {
