@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Data.Scripts;
 using Interfaces;
 using Managers;
@@ -16,9 +17,6 @@ namespace Player
 		[SerializeField] private float runSpeedMultiplier = 1.6f;
 		[SerializeField] private float crouchSpeedMultiplier = 0.5f;
 		[SerializeField] private float jumpHeight = 3f;
-
-		[Header("User Input")] 
-		[SerializeField] private float mouseSensitivity = 0.8f;
 		
 		[Header("References")]
 		[SerializeField] private GameObject cameraPosition;
@@ -49,13 +47,12 @@ namespace Player
 		private GameObject _weaponWheelInstance;
 		private GravitationalForce _gravitationalForce;
 		private Gun _gun;
-		// private CameraMouseSensitivityController _cameraMouseSensitivityController;
 
-		public bool isHoldingItem;
+		public bool IsHoldingItem { get; set; }
 		public bool IsInRangeOfInteractable { get; set; }
-		public IInteractable Interactable { get; set; }
+		public List<IInteractable> InteractablesInRange { get; set; } = new ();
 
-		public static Action<ItemData> onAddItemToPlayer;
+		public Action<ItemData> onAddItemToPlayer;
 		public static Action<Sprite> onDisplayItemInUI;
 		
 		// initialization
@@ -69,8 +66,6 @@ namespace Player
 				_cameraLocalPosition.z);
 			_gravitationalForce = GetComponent<GravitationalForce>();
 			_gun = GetComponentInChildren<Gun>();
-			// _cameraMouseSensitivityController = GetComponent<CameraMouseSensitivityController>();
-			// _cameraMouseSensitivityController.UpdateMouseSensitivity(mouseSensitivity);
 		}
 
 		// subscribe to all events and input actions
@@ -182,11 +177,8 @@ namespace Player
 		private void OnInteract(InputAction.CallbackContext ctx)
 		{
 			if (!IsInRangeOfInteractable) return;
-			else
-			{
-				Interactable.Interact();
-				IsInRangeOfInteractable = false;
-			}
+
+			InteractablesInRange[0].Interact(this);
 		}
 
 		private void OnFire(InputAction.CallbackContext ctx) => _gun.Fire();
@@ -204,7 +196,7 @@ namespace Player
 			
 			item.functions.Invoke();
 			item = default;
-			isHoldingItem = false;
+			IsHoldingItem = false;
 			onDisplayItemInUI.Invoke(null);
 		}
 
@@ -226,7 +218,7 @@ namespace Player
 		private void AddItemToPlayer(ItemData i)
 		{
 			item = i;
-			isHoldingItem = true;
+			IsHoldingItem = true;
 			onDisplayItemInUI.Invoke(i.icon);
 			print($"Player received {i.itemName} item");
 		}

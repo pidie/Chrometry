@@ -2,6 +2,8 @@
 {
 	public interface IInteractable
 	{
-		void Interact();
+		void Interact(Player.PlayerController playerController);
+
+		void DisplayAlert();
 	}
 }

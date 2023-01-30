@@ -26,16 +26,12 @@ namespace ObjectControllers
             {
                 var pc = other.GetComponent<PlayerController>();
             
-                // stop if the player has an item
-                if (pc.isHoldingItem) return;
-            
                 // set the item as available for pickup
                 pc.IsInRangeOfInteractable = true;
-                pc.Interactable = this;
-                UserInterfaceManager.onCreateCanvas.Invoke(alertPrefab);
-                _alert = UserInterfaceManager.LastCreatedCanvas;
-                _message = _alert.GetComponentInChildren<TMP_Text>();
-                _message.text = $"{data.itemName}";
+                pc.InteractablesInRange.Add(this);
+
+                if ((ItemController)pc.InteractablesInRange[0] == this)
+                    DisplayAlert();
             }
         }
 
@@ -46,9 +42,18 @@ namespace ObjectControllers
             {
                 // reverts the item as not available for pickup
                 var pc = other.GetComponent<PlayerController>();
-                pc.IsInRangeOfInteractable = false;
-                pc.Interactable = default;
+                pc.InteractablesInRange.Remove(this);
                 Destroy(_alert);
+                
+                switch (pc.InteractablesInRange.Count)
+                {
+                    case 0:
+                        pc.IsInRangeOfInteractable = false;
+                        break;
+                    case > 0:
+                        pc.InteractablesInRange[0].DisplayAlert();
+                        break;
+                }
             }
         }
 
@@ -60,13 +65,26 @@ namespace ObjectControllers
         }
 
         // calls the item to be added to the player and destroys the gameObject
-        public void Interact()
+        public void Interact(PlayerController playerController)
         {
             if (data == null) return;
             
-            PlayerController.onAddItemToPlayer?.Invoke(data);
+            playerController.onAddItemToPlayer?.Invoke(data);
+            playerController.InteractablesInRange.Remove(this);
+
+            if (playerController.InteractablesInRange.Count > 0)
+                playerController.InteractablesInRange[0].DisplayAlert();
+            
             if (gameObject)
                 Destroy(gameObject);   
+        }
+
+        public void DisplayAlert()
+        {
+            UserInterfaceManager.onCreateCanvas.Invoke(alertPrefab);
+            _alert = UserInterfaceManager.LastCreatedCanvas;
+            _message = _alert.GetComponentInChildren<TMP_Text>();
+            _message.text = $"{data.itemName}";
         }
     }
 }

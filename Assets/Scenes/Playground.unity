@@ -155,6 +155,42 @@ Transform:
   m_Father: {fileID: 657509338}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &137589403 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9072753561180196999, guid: adf4d41a951d4b3468a5ba7f93507f4a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1937356219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec8e3bd098176543920f6bc923d8ce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &137589404 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6286207716158307018, guid: adf4d41a951d4b3468a5ba7f93507f4a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1937356219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 786bd8512bed15d42ab4aba44be0551b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &137589405 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3278527810412318886, guid: adf4d41a951d4b3468a5ba7f93507f4a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1937356219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd10da61a604e74db2226ac0bb4542d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &167148220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 709986110740249254, guid: adf4d41a951d4b3468a5ba7f93507f4a,
@@ -265,6 +301,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 379782760934614073, guid: c8408586e6783884498135fa6a3224b0,
+        type: 3}
+      propertyPath: vitalsController
+      value: 
+      objectReference: {fileID: 137589404}
     - target: {fileID: 6118793835069986854, guid: c8408586e6783884498135fa6a3224b0,
         type: 3}
       propertyPath: m_Name
@@ -330,6 +371,16 @@ PrefabInstance:
       propertyPath: healthController
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6118793836617207475, guid: c8408586e6783884498135fa6a3224b0,
+        type: 3}
+      propertyPath: vitalsController
+      value: 
+      objectReference: {fileID: 137589405}
+    - target: {fileID: 6699753304711411320, guid: c8408586e6783884498135fa6a3224b0,
+        type: 3}
+      propertyPath: vitalsController
+      value: 
+      objectReference: {fileID: 137589403}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8408586e6783884498135fa6a3224b0, type: 3}
 --- !u!1001 &376936997
@@ -1954,12 +2005,12 @@ PrefabInstance:
     - target: {fileID: 1555611891924216542, guid: cc3e3f2a431ba8a47ba384cd5bfecdab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.3468385
+      value: -5.21
       objectReference: {fileID: 0}
     - target: {fileID: 1555611891924216542, guid: cc3e3f2a431ba8a47ba384cd5bfecdab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.21
+      value: 5.28
       objectReference: {fileID: 0}
     - target: {fileID: 1555611891924216542, guid: cc3e3f2a431ba8a47ba384cd5bfecdab,
         type: 3}
