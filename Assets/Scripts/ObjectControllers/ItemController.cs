@@ -62,7 +62,9 @@ namespace ObjectControllers
         // calls the item to be added to the player and destroys the gameObject
         public void Interact()
         {
-            PlayerController.onAddItemToPlayer.Invoke(data);
+            if (data == null) return;
+            
+            PlayerController.onAddItemToPlayer?.Invoke(data);
             if (gameObject)
                 Destroy(gameObject);   
         }

@@ -9,7 +9,7 @@ namespace Vitals
     public abstract class VitalsController : MonoBehaviour
     {
         [SerializeField] protected float maxValue;
-        [SerializeField] protected float currentValueOverride;
+        [SerializeField] protected float currentValueOverride = -1f;
         [SerializeField] protected float vitalRegen;
         [SerializeField] protected float vitalRegenDelay;
 
@@ -35,8 +35,9 @@ namespace Vitals
 
         protected virtual void Awake()
         {
-            currentValue = currentValueOverride < maxValue ? maxValue : currentValueOverride;
-            onUpdateDisplay?.Invoke();
+            currentValue = currentValueOverride < maxValue && currentValueOverride >= 0
+                ? currentValueOverride : maxValue;
+            UpdateValue(0);
         }
 
         protected void Update()
@@ -45,12 +46,15 @@ namespace Vitals
             if (currentValue < maxValue && canRegen)
             {
                 currentValue += vitalRegen * Time.deltaTime;
+                onToggleCollider?.Invoke(true);
                 onUpdateDisplay?.Invoke();
             }
         }
 
         public virtual void UpdateValue(float value)
-        {            
+        {
+            if (!QueryColliderIsEnabled()) return;
+            
             currentValue += value;
             if (value < 0)
             {
@@ -63,13 +67,14 @@ namespace Vitals
 
         public void UpdateMaxValue(float value) => maxValue += value;
 
-        protected IEnumerator RegenDelay()
+        protected virtual IEnumerator RegenDelay()
         {
             if (!QueryColliderIsEnabled() && QueryLastCollision() < vitalRegenDelay) 
                 yield return null;
             else
             {
                 yield return new WaitForSeconds(vitalRegenDelay);
+
                 canRegen = true;
             }
         }

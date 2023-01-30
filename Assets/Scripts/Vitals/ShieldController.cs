@@ -1,58 +1,77 @@
+using System;
+using System.Collections;
+using UnityEngine;
+
 namespace Vitals
 {
     public class ShieldController : VitalsController
     {
         private HealthController _healthController;
         private ArmorController _armorController;
-        private float _startingShield;
+        
+        public bool HasShieldGenerator { get; set; }
+
+        public Action onRestartShieldRegenerationDelay;
 
         protected override void Awake()
         {
             _healthController = GetComponent<HealthController>();
             _armorController = GetComponent<ArmorController>();
             base.Awake();
-            currentValue = _startingShield;
         }
+
+        private void OnEnable() => onRestartShieldRegenerationDelay += RestartRegenCountdown;
+
+        private void OnDisable() => onRestartShieldRegenerationDelay -= RestartRegenCountdown;
 
         public override void UpdateValue(float value)
         {
-            if (value < 0)
-                RestartRegenCountdown();
-            
-            if (value + currentValue < 0)
+            if (!QueryColliderIsEnabled() && value < 0)
             {
-                if (_armorController.QueryLastCollision() < vitalRegenDelay)
-                    RestartRegenCountdown();
-                
-                if (value + _armorController.CurrentValue < 0)
+                Debug.LogWarning("Damage reported to shields, but shields are not active.");
+                return;
+            }
+
+            void HandleShieldGain()
+            {
+                currentValue += value;
+                onToggleCollider?.Invoke(true);
+                _armorController.onToggleCollider?.Invoke(false);
+                _healthController.onToggleCollider?.Invoke(false);
+            }
+            
+            if (value < 0)
+            {
+                RestartRegenCountdown();
+
+                if (value + currentValue <= 0)
                 {
-                    if (_healthController.QueryLastCollision() < vitalRegenDelay)
-                        RestartRegenCountdown();
-                    
-                    _armorController.UpdateValue(0);
-                    _healthController.onToggleCollider(true);
-                    _healthController.UpdateValue(value + _armorController.CurrentValue + currentValue);
+                    currentValue = 0;
+                    onToggleCollider?.Invoke(false);
+
+                    if (_armorController.CurrentValue > 0)
+                        _armorController.onToggleCollider?.Invoke(true);
+                    else
+                        _healthController.onToggleCollider?.Invoke(true);
                 }
                 else
                 {
-                    _armorController.onToggleCollider(true);
-                    _armorController.UpdateValue(value + currentValue);
+                    HandleShieldGain();
                 }
-                
-                onToggleCollider.Invoke(false);
-                currentValue = 0;
             }
             else
             {
-                currentValue += value;
-                onToggleCollider.Invoke(true);
-                _armorController.onToggleCollider(false);
-                _healthController.onToggleCollider(false);
+                HandleShieldGain();
             }
             
             onUpdateDisplay?.Invoke();
         }
+        
+        protected override IEnumerator RegenDelay()
+        {
+            if (!HasShieldGenerator) yield return null;
 
-        public void SetStartingShield(float value) => _startingShield = value;
+            yield return base.RegenDelay();
+        }
     }
 }

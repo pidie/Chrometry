@@ -37,7 +37,7 @@ namespace Data.Scripts
             var healthController = _playerController.GetComponent<HealthController>();
             var maxHealth = healthController.MaxValue;
             var currentHealth = healthController.CurrentValue;
-            var amountToHeal = 0f;
+            float amountToHeal;
 
             if (currentHealth >= maxHealth * 0.7f)
                 amountToHeal = maxHealth * _minHealthPercentageHealed * 0.01f;
@@ -63,8 +63,9 @@ namespace Data.Scripts
         {
             var shieldController = _playerController.GetComponent<ShieldController>();
             shieldController.UpdateValue(_shieldAdded);
+            shieldController.HasShieldGenerator = true;
             
-            print($"Player received {_shieldAdded} shield.");
+            print($"Player received a generator and {_shieldAdded} shield.");
         }
     }
 }

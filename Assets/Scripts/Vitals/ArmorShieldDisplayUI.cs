@@ -6,10 +6,10 @@
 		{
 			base.UpdateDisplay();
 			
-			var currentProtection = vitalsController.CurrentValue;
-			var maxProtection = vitalsController.MaxValue;
+			var currentValue = vitalsController.CurrentValue;
+			var maxValue = vitalsController.MaxValue;
 			
-			iconPlayer.fillAmount = currentProtection / maxProtection;
+			iconPlayer.fillAmount = currentValue / maxValue;
 		}
 	}
 }

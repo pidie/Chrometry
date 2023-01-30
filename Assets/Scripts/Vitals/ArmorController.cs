@@ -4,36 +4,71 @@ namespace Vitals
 {
     public class ArmorController : VitalsController
     {
-        [SerializeField] private float damageReduction = 0.3f;
+        [SerializeField] private float damagePercentageMitigated = 0.3f;
         
         private HealthController _healthController;
+        private ShieldController _shieldController;
+        private float _damagePercentageMitigatedInverse;
 
         protected override void Awake()
         {
             _healthController = GetComponent<HealthController>();
+            _shieldController = GetComponent<ShieldController>();
+            _damagePercentageMitigatedInverse = 1 / (1 - damagePercentageMitigated);
             base.Awake();
         }
 
         public override void UpdateValue(float value)
         {
-            var mitigatedValue = value * (1 - damageReduction);
-            if (mitigatedValue + currentValue < 0)
+            if (!QueryColliderIsEnabled() && value < 0) return;
+            
+            var shieldIsActive = _shieldController.QueryColliderIsEnabled();
+            
+            if (value > 0)
             {
-                _healthController.onToggleCollider(true);
-                _healthController.UpdateValue(mitigatedValue + currentValue); // this grants the armor resistance to the health on the same attack
-                onToggleCollider.Invoke(false);
-                currentValue = 0;
+                if (!shieldIsActive)
+                    onToggleCollider.Invoke(true);
+
+                currentValue += value;
             }
             else
             {
-                currentValue += mitigatedValue;
-                var shieldActive = GetComponent<ShieldController>().QueryColliderIsEnabled();
-                print(shieldActive);
-                onToggleCollider.Invoke(!shieldActive);
-                _healthController.onToggleCollider(false);
+                if (_shieldController != null && _shieldController.HasShieldGenerator)
+                    _shieldController.onRestartShieldRegenerationDelay?.Invoke();
+                    
+                var damageToHealth = MitigateDamage(value, out var hasLeftoverDamage);
+
+                if (hasLeftoverDamage)
+                {
+                    _healthController.onToggleCollider.Invoke(true);
+                    _healthController.UpdateValue(damageToHealth);
+                    onToggleCollider.Invoke(false);
+                }
+                else
+                {
+                    _healthController.onToggleCollider(false);
+                }
             }
             
             onUpdateDisplay?.Invoke();
         }
+
+        public float MitigateDamage(float damage, out bool leftoverDamage)
+        {
+            var mitigatedDamage = damage * (1 - damagePercentageMitigated);
+            if (currentValue + mitigatedDamage < 0)
+            {
+                leftoverDamage = true;
+                var damagePassedToHealth = damage + currentValue * _damagePercentageMitigatedInverse;
+                currentValue = 0;
+                return damagePassedToHealth;
+            }
+            
+            leftoverDamage = false;
+            currentValue += mitigatedDamage;
+            return 0;
+        }
+
+        private void EvaluateDamagePercentMitigatedInverse() => _damagePercentageMitigatedInverse = 1 / (1 - damagePercentageMitigated);
     }
 }

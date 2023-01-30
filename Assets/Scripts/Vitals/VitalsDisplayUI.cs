@@ -29,11 +29,7 @@ namespace Vitals
 
 		protected void Start() => UpdateDisplay();
 
-		protected void OnEnable()
-		{
-			vitalsController.onUpdateDisplay += UpdateDisplay;
-			vitalsController.onUpdateDisplay.Invoke();
-		}
+		protected void OnEnable() => vitalsController.onUpdateDisplay += UpdateDisplay;
 
 		protected void OnDisable() => vitalsController.onUpdateDisplay -= UpdateDisplay;
 
