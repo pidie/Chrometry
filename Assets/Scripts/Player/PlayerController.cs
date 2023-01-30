@@ -56,6 +56,7 @@ namespace Player
 		public IInteractable Interactable { get; set; }
 
 		public static Action<ItemData> onAddItemToPlayer;
+		public static Action<Sprite> onDisplayItemInUI;
 		
 		// initialization
 		private void Awake()
@@ -184,6 +185,7 @@ namespace Player
 			else
 			{
 				Interactable.Interact();
+				IsInRangeOfInteractable = false;
 			}
 		}
 
@@ -203,6 +205,7 @@ namespace Player
 			item.functions.Invoke();
 			item = default;
 			isHoldingItem = false;
+			onDisplayItemInUI.Invoke(null);
 		}
 
 		private void OnWeaponWheelCreate(InputAction.CallbackContext ctx)
@@ -224,6 +227,7 @@ namespace Player
 		{
 			item = i;
 			isHoldingItem = true;
+			onDisplayItemInUI.Invoke(i.icon);
 			print($"Player received {i.itemName} item");
 		}
 	}
