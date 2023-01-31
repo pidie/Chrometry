@@ -8,6 +8,7 @@ namespace Vitals
     {
         private HealthController _healthController;
         private ArmorController _armorController;
+        private EnergyController _energyController;
         
         public bool HasShieldGenerator { get; set; }
 
@@ -17,12 +18,25 @@ namespace Vitals
         {
             _healthController = GetComponent<HealthController>();
             _armorController = GetComponent<ArmorController>();
+            _energyController = GetComponent<EnergyController>();
             base.Awake();
         }
 
         private void OnEnable() => onRestartShieldRegenerationDelay += RestartRegenCountdown;
 
         private void OnDisable() => onRestartShieldRegenerationDelay -= RestartRegenCountdown;
+        
+        protected override void Update()
+        {
+            if (currentValue > maxValue) currentValue = maxValue;
+            if (currentValue < maxValue && canRegen)
+            {
+                // currentValue += vitalRegen * Time.deltaTime;
+                _energyController.onUseCharge.Invoke(vitalRegen * Time.deltaTime);
+                onToggleCollider?.Invoke(true);
+                onUpdateDisplay?.Invoke();
+            }
+        }
 
         public override void UpdateValue(float value)
         {
@@ -32,14 +46,6 @@ namespace Vitals
                 return;
             }
 
-            void HandleShieldGain()
-            {
-                currentValue += value;
-                onToggleCollider?.Invoke(true);
-                _armorController.onToggleCollider?.Invoke(false);
-                _healthController.onToggleCollider?.Invoke(false);
-            }
-            
             if (value < 0)
             {
                 RestartRegenCountdown();
@@ -56,15 +62,24 @@ namespace Vitals
                 }
                 else
                 {
-                    HandleShieldGain();
+                    HandleShieldGainFromSource();
                 }
             }
             else
             {
-                HandleShieldGain();
+                HandleShieldGainFromSource();
             }
             
             onUpdateDisplay?.Invoke();
+            
+            // internal method
+            void HandleShieldGainFromSource()
+            {
+                currentValue += value;
+                onToggleCollider?.Invoke(true);
+                _armorController.onToggleCollider?.Invoke(false);
+                _healthController.onToggleCollider?.Invoke(false);
+            }
         }
         
         protected override IEnumerator RegenDelay()

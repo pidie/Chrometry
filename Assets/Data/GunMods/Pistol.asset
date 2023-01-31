@@ -16,6 +16,7 @@ MonoBehaviour:
   damageMax: 4.5
   critChance: 5
   critDamageMultiplier: 3
+  isAutomatic: 0
   timeBetweenShots: 0.3
   range: 60
   projectileSpeed: 1

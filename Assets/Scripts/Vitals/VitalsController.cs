@@ -40,7 +40,7 @@ namespace Vitals
             UpdateValue(0);
         }
 
-        protected void Update()
+        protected virtual void Update()
         {
             if (currentValue > maxValue) currentValue = maxValue;
             if (currentValue < maxValue && canRegen)
