@@ -9,8 +9,6 @@ app_version: 1.0.20
 
 The `HealthController`<swm-token data-swm-token=":Assets/Scripts/Vitals/HealthController.cs:5:5:5:`    public class HealthController : VitalsController`"/> inherits from the `VitalsController`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`"/> class, so much of its functionality can be found there. Its special characteristics revolve around the death of the entity.
 
-<br/>
-
 ## Of Note
 
 *   An entity is considered any actor or structure that uses vitals.
@@ -20,11 +18,20 @@ The `HealthController`<swm-token data-swm-token=":Assets/Scripts/Vitals/HealthCo
 *   As such, all entities whose health has been dropped to or below 0 will be referred to as _killed_ or _dead_.
     
 
-<br/>
-
-# Fields and Properties
+# Fields and Properties<br/>
 
 <br/>
+
+Private Fields
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 Assets/Scripts/Vitals/HealthController.cs
+```c#
+7              private ShieldController _shieldController;
+```
+
+<br/>
+
+`_shieldController`<swm-token data-swm-token=":Assets/Scripts/Vitals/HealthController.cs:7:5:5:`        private ShieldController _shieldController;`"/> - a reference to the attached `ShieldController`<swm-token data-swm-token=":Assets/Scripts/Vitals/HealthController.cs:7:3:3:`        private ShieldController _shieldController;`"/>
 
 <br/>
 
@@ -32,16 +39,28 @@ Public Actions
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/HealthController.cs
 ```c#
-7              public Action onDeath;
+9              public Action onDeath;
 ```
 
 <br/>
 
-`onDeath`<swm-token data-swm-token=":Assets/Scripts/Vitals/HealthController.cs:7:5:5:`        public Action onDeath;`"/> - called when this entity dies
+`onDeath`<swm-token data-swm-token=":Assets/Scripts/Vitals/HealthController.cs:9:5:5:`        public Action onDeath;`"/> - called when this entity dies<br/>
+<br/><br/>
+
+# Methods<br/>
 
 <br/>
 
-# Methods
+Sets the reference to the `ShieldController`<swm-token data-swm-token=":Assets/Scripts/Vitals/HealthController.cs:13:7:7:`            _shieldController = GetComponent&lt;ShieldController&gt;();`"/>.
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 Assets/Scripts/Vitals/HealthController.cs
+```c#
+11             protected override void Awake()
+12             {
+13                 _shieldController = GetComponent<ShieldController>();
+14                 base.Awake();
+15             }
+```
 
 <br/>
 
@@ -49,19 +68,25 @@ Updates the metric for this vital and checks to see if the change has killed thi
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 Assets/Scripts/Vitals/HealthController.cs
 ```c#
-9              public override void UpdateValue(float value)
-10             {
-11                 currentValue += value;
-12                 if (value < 0)
-13                 {
-14                     RestartRegenCountdown();
-15     
-16                     if (currentValue < 0)
-17                         onDeath.Invoke();
-18                 }
-19     
-20                 onUpdateDisplay?.Invoke();
-21             }
+17             public override void UpdateValue(float value)
+18             {
+19                 currentValue += value;
+20                 
+21                 if (value < 0)
+22                 {
+23                     if (_shieldController != null && _shieldController.HasShieldGenerator)
+24                         _shieldController.onRestartShieldRegenerationDelay?.Invoke();
+25                     if (currentValue < 0)
+26                     {
+27                         onDeath.Invoke();
+28                         return;
+29                     }
+30                     
+31                     RestartRegenCountdown();
+32                 }
+33     
+34                 onUpdateDisplay?.Invoke();
+35             }
 ```
 
 <br/>
