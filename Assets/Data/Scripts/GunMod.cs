@@ -11,8 +11,9 @@ namespace Data.Scripts
         public float damageMax;
         public float critChance;
         public float critDamageMultiplier = 1f;
-        
-        [Header("Specs")]
+
+        [Header("Specs")] 
+        public bool isAutomatic;
         public float timeBetweenShots;
         public float range;
         public float projectileSpeed;

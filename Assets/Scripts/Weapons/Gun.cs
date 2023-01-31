@@ -13,9 +13,8 @@ namespace Weapons
         [SerializeField] private GunMod gunMod;
         [SerializeField] private GameObject muzzle;
 
-        // private float _critChance;
-        // private float _critDamageMultiplier;
         private bool _canFire;
+        private bool _fireRequested;
         private Vector3 _baseMuzzlePosition;
 
         public GunStats gunStats;
@@ -26,50 +25,68 @@ namespace Weapons
             SetGunMod(gunMod);
         }
 
-        public void Fire()
+        private void Update()
         {
-            if (!_canFire) return;
-            _canFire = false;
-            StartCoroutine(GunFireCooldown());
-            
-            // check to see if the projectile will hit something
-            Vector3 direction;
-            UnityEngine.Physics.Raycast(transform.position, transform.forward, out var hit, gunMod.range * 5);
-            
-            // the projectile will either fly straight for its range or will fly towards the first target in range
-            if (hit.point != Vector3.zero)
-                direction = hit.point - muzzle.transform.position;
-            else
-                direction = transform.position + transform.forward * gunMod.range - muzzle.transform.position;
-
-            direction.Normalize();
-
-            // create the projectile
-            GameObject projectileGo;
-            Projectile projectile;
-
-            if (gunStats.critChance >= Random.Range(0f, 100f))
+            if (_fireRequested)
             {
-                projectileGo = Instantiate(gunMod.projectile.critModel, muzzle.transform.position, quaternion.identity);
-                projectile = projectileGo.GetComponent<Projectile>();
-                projectile.WillCriticallyHit = true;
+                Fire();
+
+                if (!gunStats.isAutomatic)
+                    _fireRequested = false;
             }
+        }
+
+        public void FireRequest(InputAction.CallbackContext ctx) => _fireRequested = !ctx.canceled;
+
+        private void Fire()
+        {
+            if (!_canFire) { }
             else
             {
-                projectileGo = Instantiate(gunMod.projectile.baseModel, muzzle.transform.position, quaternion.identity);
-                projectile = projectileGo.GetComponent<Projectile>();
-            }
-            
-            projectileGo.transform.rotation = transform.rotation;
-            
-            // store data in the projectile
-            projectile.MaxDistance = gunMod.range;
-            projectile.ProjectileSpeed = gunMod.projectileSpeed;
-            projectile.Direction = direction;
-            projectile.CritDamageMultiplier = gunStats.critDamageMultiplier;
+                _canFire = false;
+                StartCoroutine(GunFireCooldown());
 
-            var damage = Random.Range(gunMod.damageMin, gunMod.damageMax);
-            projectile.Damage = projectile.WillCriticallyHit ? damage * gunStats.critDamageMultiplier : damage;
+                // check to see if the projectile will hit something
+                Vector3 direction;
+                UnityEngine.Physics.Raycast(transform.position, transform.forward, out var hit, gunMod.range * 5);
+
+                // the projectile will either fly straight for its range or will fly towards the first target in range
+                if (hit.point != Vector3.zero)
+                    direction = hit.point - muzzle.transform.position;
+                else
+                    direction = transform.position + transform.forward * gunMod.range - muzzle.transform.position;
+
+                direction.Normalize();
+
+                // create the projectile
+                GameObject projectileGo;
+                Projectile projectile;
+
+                if (gunStats.critChance >= Random.Range(0f, 100f))
+                {
+                    projectileGo = Instantiate(gunMod.projectile.critModel, muzzle.transform.position,
+                        quaternion.identity);
+                    projectile = projectileGo.GetComponent<Projectile>();
+                    projectile.WillCriticallyHit = true;
+                }
+                else
+                {
+                    projectileGo = Instantiate(gunMod.projectile.baseModel, muzzle.transform.position,
+                        quaternion.identity);
+                    projectile = projectileGo.GetComponent<Projectile>();
+                }
+
+                projectileGo.transform.rotation = transform.rotation;
+
+                // store data in the projectile
+                projectile.MaxDistance = gunMod.range;
+                projectile.ProjectileSpeed = gunMod.projectileSpeed;
+                projectile.Direction = direction;
+                projectile.CritDamageMultiplier = gunStats.critDamageMultiplier;
+
+                var damage = Random.Range(gunMod.damageMin, gunMod.damageMax);
+                projectile.Damage = projectile.WillCriticallyHit ? damage * gunStats.critDamageMultiplier : damage;
+            }
         }
 
         public void Secondary(InputAction.CallbackContext ctx)
@@ -87,8 +104,8 @@ namespace Weapons
         private void SetGunMod(GunMod mod)
         {
             gunMod = mod;
-            gunStats = new GunStats(gunMod.damageMin, gunMod.damageMax, gunMod.critChance, gunMod.critDamageMultiplier, gunMod.timeBetweenShots,
-                gunMod.range, gunMod.projectileSpeed, gunMod.projectile, gunMod.model);
+            gunStats = new GunStats(gunMod.damageMin, gunMod.damageMax, gunMod.critChance, gunMod.critDamageMultiplier, 
+                gunMod.isAutomatic, gunMod.timeBetweenShots, gunMod.range, gunMod.projectileSpeed, gunMod.projectile, gunMod.model);
             
             var modGo = Instantiate(gunMod.model, _baseMuzzlePosition, Quaternion.identity, transform);
             var modController = modGo.GetComponent<GunModModelController>();
@@ -110,19 +127,21 @@ namespace Weapons
             public float damageMax;
             public float critChance;
             public float critDamageMultiplier;
+            public bool isAutomatic;
             public float timeBetweenShots;
             public float range;
             public float projectileSpeed;
             public ProjectileData projectile;
             public GameObject model;
 
-            public GunStats(float damageMin, float damageMax, float critChance, float critDamageMultiplier, float timeBetweenShots, float range,
-                float projectileSpeed, ProjectileData projectile, GameObject model)
+            public GunStats(float damageMin, float damageMax, float critChance, float critDamageMultiplier, bool isAutomatic, 
+                float timeBetweenShots, float range, float projectileSpeed, ProjectileData projectile, GameObject model)
             {
                 this.damageMin = damageMin;
                 this.damageMax = damageMax;
                 this.critChance = critChance;
                 this.critDamageMultiplier = critDamageMultiplier;
+                this.isAutomatic = isAutomatic;
                 this.timeBetweenShots = timeBetweenShots;
                 this.range = range;
                 this.projectileSpeed = projectileSpeed;

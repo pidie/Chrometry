@@ -99,6 +99,7 @@ namespace Player
 			_fire = _playerControls.Player.Fire;
 			_fire.Enable();
 			_fire.performed += OnFire;
+			_fire.canceled += OnFire;
 
 			// all three states are here because certain gun mods will have different effects, requiring different state checks
 			_secondary = _playerControls.Player.Secondary;
@@ -181,7 +182,7 @@ namespace Player
 			InteractablesInRange[0].Interact(this);
 		}
 
-		private void OnFire(InputAction.CallbackContext ctx) => _gun.Fire();
+		private void OnFire(InputAction.CallbackContext ctx) => _gun.FireRequest(ctx);
 
 		private void OnSecondary(InputAction.CallbackContext ctx) => _gun.Secondary(ctx);
 
