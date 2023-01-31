@@ -1,0 +1,117 @@
+---
+id: xos2h
+title: VitalsDisplayUI
+file_version: 1.1.1
+app_version: 1.1.0
+---
+
+# Overview
+
+This class is the base component for any UI element that gets input from a `VitalsController`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsController.cs:9:7:7:`    public abstract class VitalsController : MonoBehaviour`"/> or any component inherited from one.<br/>
+<br/>
+
+## Of Note
+
+*   This class requires a `UnityEngine.UI.Image` component; the component will be automatically supplied once the script is added.
+    
+    *   Ensure that the image's type is set to `filled`.
+        
+*   Two serialized fields (`maxHealthColor`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:11:9:9:`		[SerializeField] protected Color maxHealthColor;`"/> and `minHealthColor`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:12:9:9:`		[SerializeField] protected Color minHealthColor;`"/>) are optional.<br/>
+    
+
+# Fields and Properties
+
+<br/>
+
+Serialized Fields
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 Assets/Scripts/Vitals/VitalsDisplayUI.cs
+```c#
+10     		[SerializeField] protected VitalsController vitalsController;
+11     		[SerializeField] protected Color maxHealthColor;
+12     		[SerializeField] protected Color minHealthColor;
+```
+
+<br/>
+
+`vitalsController`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:10:9:9:`		[SerializeField] protected VitalsController vitalsController;`"/> - a reference to the `VitalsController`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:10:7:7:`		[SerializeField] protected VitalsController vitalsController;`"/><br/>
+`maxHealthColor`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:11:9:9:`		[SerializeField] protected Color maxHealthColor;`"/> - the color applied to the image when the metric is at its maximum value<br/>
+`minHealthColor`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:12:9:9:`		[SerializeField] protected Color minHealthColor;`"/> - the color applied to the image when the metric is at its minimum value
+
+<br/>
+
+Protected Fields
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 Assets/Scripts/Vitals/VitalsDisplayUI.cs
+```c#
+14     		protected TMP_Text text;
+15     		protected Image iconPlayer;
+16     		protected Image icon;
+```
+
+<br/>
+
+`text`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:14:5:5:`		protected TMP_Text text;`"/> - a reference to an attached `TMP_Text`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:14:3:3:`		protected TMP_Text text;`"/> component.<br/>
+`iconPlayer`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:15:5:5:`		protected Image iconPlayer;`"/> - a reference to an image for the player's UI<br/>
+`icon`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:16:5:5:`		protected Image icon;`"/>\- a reference to an image<br/>
+<br/>
+
+# Methods
+
+<br/>
+
+Sets the available references for the protected fields.
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 Assets/Scripts/Vitals/VitalsDisplayUI.cs
+```c#
+18     		protected void Awake()
+19     		{
+20     			text = GetComponent<TMP_Text>();
+21     			if (text == null)
+22     				text = GetComponentInChildren<TMP_Text>();
+23     
+24     			if (vitalsController.GetComponent<Player.PlayerController>())
+25     				iconPlayer = GetComponent<Image>();
+26     			else
+27     				icon = GetComponent<Image>();
+28     		}
+```
+
+<br/>
+
+Pushes the display to update.
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 Assets/Scripts/Vitals/VitalsDisplayUI.cs
+```c#
+30     		protected void Start() => UpdateDisplay();
+```
+
+<br/>
+
+Registers and deregisters to the `onUpdateDisplay`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:32:13:13:`		protected void OnEnable() =&gt; vitalsController.onUpdateDisplay += UpdateDisplay;`"/> event of `vitalsController`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:10:9:9:`		[SerializeField] protected VitalsController vitalsController;`"/>.
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 Assets/Scripts/Vitals/VitalsDisplayUI.cs
+```c#
+32     		protected void OnEnable() => vitalsController.onUpdateDisplay += UpdateDisplay;
+33     
+34     		protected void OnDisable() => vitalsController.onUpdateDisplay -= UpdateDisplay;
+```
+
+<br/>
+
+Pushes the latest data to the UI.
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 Assets/Scripts/Vitals/VitalsDisplayUI.cs
+```c#
+36     		protected virtual void UpdateDisplay()
+37     		{
+38     			if (text != null)
+39     				text.text = vitalsController.CurrentValue.ToString();
+40     			
+41     			// todo : insert generic health bar method here - for enemies and destructibles with visible health
+42     		}
+```
+
+<br/>
+
+This file was generated by Swimm. [Click here to view it in the app](https://app.swimm.io/repos/Z2l0aHViJTNBJTNBQ2hyb21ldHJ5JTNBJTNBcGlkaWU=/docs/xos2h).
