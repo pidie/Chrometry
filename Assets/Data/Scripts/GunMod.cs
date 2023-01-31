@@ -26,11 +26,5 @@ namespace Data.Scripts
         
         [Header("Misc")] 
         public GameObject model;
-
-        /*
-         * things to track:
-         * - which InputAction events are tracked during the secondary action for this gun mod?
-         * - what does the secondary function of this gun mod do?
-         */
     }
 }

@@ -8,14 +8,47 @@ namespace Vitals
         [SerializeField] private VitalsController device;
         [SerializeField] private float transferRate;
 
+        private bool _isCurrentlyCharging;
+        private float _chargeRate;
+
         public float TransferRate => transferRate;
 
         public Action<float> onUseCharge;
+        public Action<float> onStartCharging;
+        public Action onStopCharging;
 
-        protected override void Awake()
+        private void OnEnable()
         {
             onUseCharge += UseCharge;
-            base.Awake();
+            onStartCharging += StartCharging;
+            onStopCharging += StopCharging;
+        }
+
+        private void OnDisable()
+        {
+            onUseCharge -= UseCharge;
+            onStartCharging -= StartCharging;
+            onStopCharging -= StopCharging;
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+
+            if (_isCurrentlyCharging)
+                UpdateValue(_chargeRate * Time.deltaTime);
+        }
+
+        public override void UpdateValue(float value)
+        {
+            currentValue += value;
+            if (value < 0)
+            {
+                RestartRegenCountdown();
+                RefreshColliderEnabledStates();
+            }
+
+            onUpdateDisplay?.Invoke();
         }
 
         private void UseCharge(float energyRequested)
@@ -29,5 +62,13 @@ namespace Vitals
                 onUpdateDisplay.Invoke();
             }
         }
+
+        private void StartCharging(float value)
+        {
+            _isCurrentlyCharging = true;
+            _chargeRate = value;
+        }
+
+        private void StopCharging() => _isCurrentlyCharging = false;
     }
 }

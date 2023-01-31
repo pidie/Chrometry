@@ -95,6 +95,7 @@ namespace Player
 			_interact = _playerControls.Player.Interact;
 			_interact.Enable();
 			_interact.performed += OnInteract;
+			_interact.canceled += OnInteract;
 			
 			_fire = _playerControls.Player.Fire;
 			_fire.Enable();
@@ -179,7 +180,7 @@ namespace Player
 		{
 			if (!IsInRangeOfInteractable) return;
 
-			InteractablesInRange[0].Interact(this);
+			InteractablesInRange[0].Interact(this, ctx);
 		}
 
 		private void OnFire(InputAction.CallbackContext ctx) => _gun.FireRequest(ctx);

@@ -1,45 +1,44 @@
-using Data.Scripts;
+using System;
 using Interfaces;
 using Managers;
 using Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
-namespace ObjectControllers
+namespace Interactions
 {
-    public class ItemController : MonoBehaviour, IInteractable
+    public class RechargeEnergy : MonoBehaviour, IInteractable
     {
-        [SerializeField] private ItemData data;
-        [SerializeField] private Image icon;
         [SerializeField] private GameObject alertPrefab;
+        [SerializeField] private float transferRate;
+        [SerializeField] private string messageText;
 
         private GameObject _alert;
         private TMP_Text _message;
 
-        private void Awake() => icon.sprite = data.icon;
-
         private void OnTriggerEnter(Collider other)
         {
-            var pc = other.GetComponent<PlayerController>();
+            var trigger = other.GetComponent<InteractableTrigger>();
             
-            if (pc)
+            if (trigger)
             {
+                var pc = trigger.PlayerController;
                 pc.IsInRangeOfInteractable = true;
                 pc.InteractablesInRange.Add(this);
 
-                if ((ItemController)pc.InteractablesInRange[0] == this)
+                if ((RechargeEnergy)pc.InteractablesInRange[0] == this)
                     DisplayAlert();
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            var pc = other.GetComponent<PlayerController>();
+            var trigger = other.GetComponent<InteractableTrigger>();
             
-            if (pc)
+            if (trigger)
             {
+                var pc = trigger.PlayerController;
                 pc.InteractablesInRange.Remove(this);
                 Destroy(_alert);
                 
@@ -55,26 +54,13 @@ namespace ObjectControllers
             }
         }
 
-        // destroy the pop up if the gameObject is destroyed
-        private void OnDestroy()
-        {
-            if (_alert)
-                Destroy(_alert);
-        }
-
-        // calls the item to be added to the player and destroys the gameObject
         public void Interact(PlayerController playerController, InputAction.CallbackContext ctx)
         {
-            if (data == null) return;
-            
-            playerController.onAddItemToPlayer?.Invoke(data);
-            playerController.InteractablesInRange.Remove(this);
-
-            if (playerController.InteractablesInRange.Count > 0)
-                playerController.InteractablesInRange[0].DisplayAlert();
-            
-            if (gameObject)
-                Destroy(gameObject);   
+            var energyController = playerController.GetComponent<Vitals.EnergyController>();
+            if (ctx.performed)
+                energyController.onStartCharging?.Invoke(transferRate);
+            else if (ctx.canceled)
+                energyController.onStopCharging?.Invoke();
         }
 
         public void DisplayAlert()
@@ -82,7 +68,7 @@ namespace ObjectControllers
             UserInterfaceManager.onCreateCanvas.Invoke(alertPrefab);
             _alert = UserInterfaceManager.LastCreatedCanvas;
             _message = _alert.GetComponentInChildren<TMP_Text>();
-            _message.text = $"{data.itemName}";
+            _message.text = $"{messageText}";
         }
     }
 }
