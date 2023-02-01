@@ -9,8 +9,6 @@ app_version: 1.1.0
 
 The `Gun`<swm-token data-swm-token=":Assets/TooManyCrosshairs/HELLSLAYER Crosshairs/_Demo/Scripts/Gun.cs:7:5:5:`    public class Gun : MonoBehaviour`"/>script is responsible for instantiating projectiles. The gun uses data from a `GunMod`<swm-token data-swm-token=":Assets/Data/Scripts/GunMod.cs:7:5:5:`    public class GunMod : ScriptableObject`"/>script to build the projectile and send it on its way.
 
-<br/>
-
 ## Of Note
 
 *   The secondary functionality is called through the `Gun`<swm-token data-swm-token=":Assets/TooManyCrosshairs/HELLSLAYER Crosshairs/_Demo/Scripts/Gun.cs:7:5:5:`    public class Gun : MonoBehaviour`"/> script, but its actual code is handled in a separate script called `GunModSecondaryManager`<swm-token data-swm-token=":Assets/Scripts/Managers/GunModSecondaryManager.cs:8:5:5:`    public class GunModSecondaryManager : MonoBehaviour`"/>.
@@ -18,11 +16,7 @@ The `Gun`<swm-token data-swm-token=":Assets/TooManyCrosshairs/HELLSLAYER Crossha
 *   These methods are assigned via the inspector and named explicitly with the name of the gun mod and the callback context required for execution.
     
 
-<br/>
-
 # Fields and Properties
-
-<br/>
 
 <br/>
 
@@ -38,8 +32,6 @@ Serialized Fields
 
 `gunMod`<swm-token data-swm-token=":Assets/Scripts/Weapons/Gun.cs:13:9:9:`        [SerializeField] private GunMod gunMod;`"/> - a container storing data about the gun mod<br/>
 `muzzle`<swm-token data-swm-token=":Assets/Scripts/Weapons/Gun.cs:14:9:9:`        [SerializeField] private GameObject muzzle;`"/>\- the position where projectiles will be instantiated
-
-<br/>
 
 <br/>
 
@@ -59,9 +51,6 @@ Private Fields
 `_baseMuzzlePosition`<swm-token data-swm-token=":Assets/Scripts/Weapons/Gun.cs:18:5:5:`        private Vector3 _baseMuzzlePosition;`"/> - the initial muzzle position without any gun mods
 
 *   As the player switches gun mods, the `muzzle`<swm-token data-swm-token=":Assets/Scripts/Weapons/Gun.cs:14:9:9:`        [SerializeField] private GameObject muzzle;`"/> position will change. The `_baseMuzzlePosition`<swm-token data-swm-token=":Assets/Scripts/Weapons/Gun.cs:18:5:5:`        private Vector3 _baseMuzzlePosition;`"/> is therefore a required grounding point so the next `gunMod`<swm-token data-swm-token=":Assets/Scripts/Weapons/Gun.cs:13:9:9:`        [SerializeField] private GunMod gunMod;`"/> attached affixes itself in the right place.
-    
-
-<br/>
 
 <br/>
 
@@ -75,8 +64,6 @@ Public Fields
 <br/>
 
 `gunStats`<swm-token data-swm-token=":Assets/Scripts/Weapons/Gun.cs:20:5:5:`        public GunStats gunStats;`"/> - a container for data from the `gunMod`<swm-token data-swm-token=":Assets/Scripts/Weapons/Gun.cs:13:9:9:`        [SerializeField] private GunMod gunMod;`"/>that can be manipulated.
-
-<br/>
 
 <br/>
 
@@ -118,11 +105,7 @@ Structs
 
 `GunStats`<swm-token data-swm-token=":Assets/Scripts/Weapons/Gun.cs:20:3:3:`        public GunStats gunStats;`"/> - creates a copy of the data from the `gunMod`<swm-token data-swm-token=":Assets/Scripts/Weapons/Gun.cs:13:9:9:`        [SerializeField] private GunMod gunMod;`"/> so it can be manipulated without damaging the initial data
 
-<br/>
-
 # Methods
-
-<br/>
 
 <br/>
 
