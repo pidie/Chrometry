@@ -2,7 +2,7 @@
 id: m2epd
 title: PlayerController
 file_version: 1.1.1
-app_version: 1.1.0
+app_version: 1.1.2
 ---
 
 # Overview
@@ -110,7 +110,7 @@ Private Fields - Unsorted
 
 `_characterController`<swm-token data-swm-token=":Assets/Scripts/Player/PlayerController.cs:39:5:5:`		private CharacterController _characterController;`"/> - the character controller assigned to the player<br/>
 `_cameraTransform`<swm-token data-swm-token=":Assets/Scripts/Player/PlayerController.cs:40:5:5:`		private Transform _cameraTransform;`"/> - a reference to the player camera (default - `Camera.main`<swm-token data-swm-token=":Assets/Scripts/Player/PlayerController.cs:63:17:19:`			if (Camera.main != null) _cameraTransform = Camera.main.transform;`"/>)<br/>
-`_movementDirection`<swm-token data-swm-token=":Assets/Scripts/Player/PlayerController.cs:41:5:5:`		private Vector3 _movementDirection;`"/> - ### see above smh<br/>
+`_movementDirection`<swm-token data-swm-token=":Assets/Scripts/Player/PlayerController.cs:41:5:5:`		private Vector3 _movementDirection;`"/> - stores the delta information from player input as a Vector2<br/>
 `_velocity`<swm-token data-swm-token=":Assets/Scripts/Player/PlayerController.cs:42:5:5:`		private Vector3 _velocity;`"/> - the speed (and direction) in which the player is moving<br/>
 `_cameraLocalPosition`<swm-token data-swm-token=":Assets/Scripts/Player/PlayerController.cs:43:5:5:`		private Vector3 _cameraLocalPosition;`"/> - the base position of the camera<br/>
 `_cameraLocalCrouchPosition`<swm-token data-swm-token=":Assets/Scripts/Player/PlayerController.cs:44:5:5:`		private Vector3 _cameraLocalCrouchPosition;`"/> - the base position of the camera while crouching
