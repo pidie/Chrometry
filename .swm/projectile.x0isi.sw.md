@@ -5,15 +5,11 @@ file_version: 1.1.1
 app_version: 1.1.2
 ---
 
-Projectiles are objects fired from guns. They store information on what will happen when they collide with a `VitalsColliderController`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsColliderController.cs:7:5:5:`    public class VitalsColliderController : MonoBehaviour`"/>.
+Projectiles are objects fired from guns. They store information on what will happen when they collide with a `VitalsColliderController`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsColliderController.cs:7:5:5:`    public class VitalsColliderController : MonoBehaviour`"/>. If they do not make said collision, they will eventually destroy themselves.
 
 Because this deals damage, it inherits from the `IDamager` interface.
 
-<br/>
-
 # Fields and Properties
-
-<br/>
 
 <br/>
 
@@ -31,7 +27,22 @@ Public Fields
 
 <br/>
 
+`MaxDistance`<swm-token data-swm-token=":Assets/Scripts/Weapons/Damagers/Projectile.cs:8:5:5:`        public float MaxDistance { get; set; }`"/> - the maximum distance this instance can travel before destroying itself<br/>
+`ProjectileSpeed`<swm-token data-swm-token=":Assets/Scripts/Weapons/Damagers/Projectile.cs:9:5:5:`        public float ProjectileSpeed { get; set; }`"/> - how quickly this instance travels<br/>
+`Direction`<swm-token data-swm-token=":Assets/Scripts/Weapons/Damagers/Projectile.cs:10:5:5:`        public Vector3 Direction { get; set; }`"/> - the direction this instance moves in<br/>
+`Damage`<swm-token data-swm-token=":Assets/Scripts/Weapons/Damagers/Projectile.cs:11:5:5:`        public float Damage { get; set; }`"/> - how much damage this instance deals on impact<br/>
+`WillCriticallyHit`<swm-token data-swm-token=":Assets/Scripts/Weapons/Damagers/Projectile.cs:12:5:5:`        public bool WillCriticallyHit { get; set; }`"/> - whether or not this instance will critically hit<br/>
+`CritDamageMultiplier`<swm-token data-swm-token=":Assets/Scripts/Weapons/Damagers/Projectile.cs:13:5:5:`        public float CritDamageMultiplier { get; set; }`"/> - a multiplier for the damage dealt
+
+<br/>
+
 # Methods
+
+<br/>
+
+# Related Articles
+
+// IDamager
 
 <br/>
 
