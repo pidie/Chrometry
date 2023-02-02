@@ -1,14 +1,12 @@
 using UnityEngine;
-using Weapons;
-using Weapons.Damagers;
 
 namespace Tools
 {
     public class DestroyProjectiles : MonoBehaviour
     {
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider other)
         {
-            var projectile = collision.gameObject.GetComponent<Projectile>();
+            var projectile = other.gameObject.GetComponent<Weapons.Damagers.Projectile>();
         
             if (projectile)
                 projectile.CollideWithObject();

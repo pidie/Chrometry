@@ -12,6 +12,7 @@ namespace Vitals
         private float _chargeRate;
 
         public float TransferRate => transferRate;
+        public bool CanRegen { get; set; }
 
         public Action<float> onUseCharge;
         public Action<float> onStartCharging;
@@ -65,8 +66,11 @@ namespace Vitals
 
         private void StartCharging(float value)
         {
-            _isCurrentlyCharging = true;
-            _chargeRate = value;
+            if (CanRegen)
+            {
+                _isCurrentlyCharging = true;
+                _chargeRate = value;
+            }
         }
 
         private void StopCharging() => _isCurrentlyCharging = false;

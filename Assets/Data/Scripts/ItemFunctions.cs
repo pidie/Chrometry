@@ -62,8 +62,10 @@ namespace Data.Scripts
         public void AddShield()
         {
             var shieldController = _playerController.GetComponent<ShieldController>();
+            var energyController = _playerController.GetComponent<EnergyController>();
             shieldController.UpdateValue(_shieldAdded);
             shieldController.HasShieldGenerator = true;
+            energyController.CanRegen = true;
             
             print($"Player received a generator and {_shieldAdded} shield.");
         }

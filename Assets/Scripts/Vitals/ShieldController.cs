@@ -31,7 +31,6 @@ namespace Vitals
             if (currentValue > maxValue) currentValue = maxValue;
             if (currentValue < maxValue && canRegen)
             {
-                // currentValue += vitalRegen * Time.deltaTime;
                 _energyController.onUseCharge.Invoke(vitalRegen * Time.deltaTime);
                 onToggleCollider?.Invoke(true);
                 onUpdateDisplay?.Invoke();
