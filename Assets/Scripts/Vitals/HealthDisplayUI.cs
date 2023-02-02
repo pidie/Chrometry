@@ -19,12 +19,12 @@ namespace Vitals
                 {
                     var percentage = (currentHealth - twentyPercent) / eightyPercent;
                     iconPlayer.fillAmount = 1f;
-                    iconPlayer.color = Color.Lerp(minHealthColor, maxHealthColor, percentage);
+                    iconPlayer.color = Color.Lerp(minVitalsColor, maxVitalsColor, percentage);
                 }
                 else
                 {
                     iconPlayer.fillAmount = currentHealth / twentyPercent;
-                    iconPlayer.color = minHealthColor;
+                    iconPlayer.color = minVitalsColor;
                 }
             }
         }

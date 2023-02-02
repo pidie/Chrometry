@@ -14,7 +14,7 @@ namespace Vitals
         {
             _healthController = GetComponent<HealthController>();
             _shieldController = GetComponent<ShieldController>();
-            _damagePercentageMitigatedInverse = 1 / (1 - damagePercentageMitigated);
+            EvaluateDamagePercentMitigatedInverse();
             base.Awake();
         }
 

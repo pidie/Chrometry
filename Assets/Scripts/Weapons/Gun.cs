@@ -48,7 +48,7 @@ namespace Weapons
 
                 // check to see if the projectile will hit something
                 Vector3 direction;
-                UnityEngine.Physics.Raycast(transform.position, transform.forward, out var hit, gunMod.range * 5);
+                UnityEngine.Physics.Raycast(transform.position, transform.forward, out var hit, gunStats.range * 5);
 
                 // the projectile will either fly straight for its range or will fly towards the first target in range
                 if (hit.point != Vector3.zero)
@@ -64,14 +64,14 @@ namespace Weapons
 
                 if (gunStats.critChance >= Random.Range(0f, 100f))
                 {
-                    projectileGo = Instantiate(gunMod.projectile.critModel, muzzle.transform.position,
+                    projectileGo = Instantiate(gunStats.projectile.critModel, muzzle.transform.position,
                         quaternion.identity);
                     projectile = projectileGo.GetComponent<Projectile>();
                     projectile.WillCriticallyHit = true;
                 }
                 else
                 {
-                    projectileGo = Instantiate(gunMod.projectile.baseModel, muzzle.transform.position,
+                    projectileGo = Instantiate(gunStats.projectile.baseModel, muzzle.transform.position,
                         quaternion.identity);
                     projectile = projectileGo.GetComponent<Projectile>();
                 }
@@ -79,12 +79,12 @@ namespace Weapons
                 projectileGo.transform.rotation = transform.rotation;
 
                 // store data in the projectile
-                projectile.MaxDistance = gunMod.range;
-                projectile.ProjectileSpeed = gunMod.projectileSpeed;
+                projectile.MaxDistance = gunStats.range;
+                projectile.ProjectileSpeed = gunStats.projectileSpeed;
                 projectile.Direction = direction;
                 projectile.CritDamageMultiplier = gunStats.critDamageMultiplier;
 
-                var damage = Random.Range(gunMod.damageMin, gunMod.damageMax);
+                var damage = Random.Range(gunStats.damageMin, gunStats.damageMax);
                 projectile.Damage = projectile.WillCriticallyHit ? damage * gunStats.critDamageMultiplier : damage;
             }
         }

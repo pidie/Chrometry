@@ -8,8 +8,8 @@ namespace Vitals
 	public abstract class VitalsDisplayUI : MonoBehaviour
 	{
 		[SerializeField] protected VitalsController vitalsController;
-		[SerializeField] protected Color maxHealthColor;
-		[SerializeField] protected Color minHealthColor;
+		[SerializeField] protected Color maxVitalsColor;
+		[SerializeField] protected Color minVitalsColor;
 
 		protected TMP_Text text;
 		protected Image iconPlayer;
@@ -25,9 +25,9 @@ namespace Vitals
 				iconPlayer = GetComponent<Image>();
 			else
 				icon = GetComponent<Image>();
-		}
 
-		protected void Start() => UpdateDisplay();
+			UpdateDisplay();
+		}
 
 		protected void OnEnable() => vitalsController.onUpdateDisplay += UpdateDisplay;
 
