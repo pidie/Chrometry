@@ -2,7 +2,7 @@
 id: xos2h
 title: VitalsDisplayUI
 file_version: 1.1.1
-app_version: 1.1.0
+app_version: 1.1.4
 ---
 
 # Overview
@@ -16,7 +16,7 @@ This class is the base component for any UI element that gets input from a `Vita
     
     *   Ensure that the image's type is set to `filled`.
         
-*   Two serialized fields (`maxHealthColor`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:11:9:9:`		[SerializeField] protected Color maxHealthColor;`"/> and `minHealthColor`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:12:9:9:`		[SerializeField] protected Color minHealthColor;`"/>) are optional.<br/>
+*   Two serialized fields (`maxVitalsColor`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:11:9:9:`		[SerializeField] protected Color maxVitalsColor;`"/> and `minVitalsColor`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:12:9:9:`		[SerializeField] protected Color minVitalsColor;`"/>) are optional.<br/>
     
 
 # Fields and Properties
@@ -28,15 +28,15 @@ Serialized Fields
 ### 📄 Assets/Scripts/Vitals/VitalsDisplayUI.cs
 ```c#
 10     		[SerializeField] protected VitalsController vitalsController;
-11     		[SerializeField] protected Color maxHealthColor;
-12     		[SerializeField] protected Color minHealthColor;
+11     		[SerializeField] protected Color maxVitalsColor;
+12     		[SerializeField] protected Color minVitalsColor;
 ```
 
 <br/>
 
 `vitalsController`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:10:9:9:`		[SerializeField] protected VitalsController vitalsController;`"/> - a reference to the `VitalsController`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:10:7:7:`		[SerializeField] protected VitalsController vitalsController;`"/><br/>
-`maxHealthColor`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:11:9:9:`		[SerializeField] protected Color maxHealthColor;`"/> - the color applied to the image when the metric is at its maximum value<br/>
-`minHealthColor`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:12:9:9:`		[SerializeField] protected Color minHealthColor;`"/> - the color applied to the image when the metric is at its minimum value
+`maxVitalsColor`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:11:9:9:`		[SerializeField] protected Color maxVitalsColor;`"/> - the color applied to the image when the metric is at its maximum value<br/>
+`minVitalsColor`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:12:9:9:`		[SerializeField] protected Color minVitalsColor;`"/> - the color applied to the image when the metric is at its minimum value
 
 <br/>
 
@@ -74,16 +74,9 @@ Sets the available references for the protected fields.
 25     				iconPlayer = GetComponent<Image>();
 26     			else
 27     				icon = GetComponent<Image>();
-28     		}
-```
-
-<br/>
-
-Pushes the display to update.
-<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
-### 📄 Assets/Scripts/Vitals/VitalsDisplayUI.cs
-```c#
-30     		protected void Start() => UpdateDisplay();
+28     
+29     			UpdateDisplay();
+30     		}
 ```
 
 <br/>
