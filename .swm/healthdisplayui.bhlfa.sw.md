@@ -2,14 +2,12 @@
 id: bhlfa
 title: HealthDisplayUI
 file_version: 1.1.1
-app_version: 1.0.20
+app_version: 1.1.4
 ---
 
 # Overview
 
 This component controls displays that track the health of an entity. It inherits from `VitalsDisplayUI`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsDisplayUI.cs:8:7:7:`	public abstract class VitalsDisplayUI : MonoBehaviour`"/> and is therefore able to display the player's health and that of any other entities in the game.
-
-<br/>
 
 ## Of Note
 
@@ -30,13 +28,9 @@ This component controls displays that track the health of an entity. It inherits
     *   The pink cross could have runes etched into it that remain as the player's health drops in the first phase. Then, during the second phase when the player' health continues to drop, the runes could be on the red cross but etched in black.
         
 
-<br/>
-
 # Fields and Properties
 
 Currently, there are none in this class.
-
-<br/>
 
 # Methods
 
@@ -61,12 +55,12 @@ Takes the player's health and adjusts the visual display to match the two-phase 
 19                     {
 20                         var percentage = (currentHealth - twentyPercent) / eightyPercent;
 21                         iconPlayer.fillAmount = 1f;
-22                         iconPlayer.color = Color.Lerp(minHealthColor, maxHealthColor, percentage);
+22                         iconPlayer.color = Color.Lerp(minVitalsColor, maxVitalsColor, percentage);
 23                     }
 24                     else
 25                     {
 26                         iconPlayer.fillAmount = currentHealth / twentyPercent;
-27                         iconPlayer.color = minHealthColor;
+27                         iconPlayer.color = minVitalsColor;
 28                     }
 29                 }
 30             }
