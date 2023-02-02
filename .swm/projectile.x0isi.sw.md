@@ -2,7 +2,7 @@
 id: x0isi
 title: Projectile
 file_version: 1.1.1
-app_version: 1.1.2
+app_version: 1.1.3
 ---
 
 Projectiles are objects fired from guns. They store information on what will happen when they collide with a `VitalsColliderController`<swm-token data-swm-token=":Assets/Scripts/Vitals/VitalsColliderController.cs:7:5:5:`    public class VitalsColliderController : MonoBehaviour`"/>. If they do not make said collision, they will eventually destroy themselves.
@@ -36,7 +36,80 @@ Public Fields
 
 <br/>
 
+<br/>
+
+Private Fields
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 Assets/Scripts/Weapons/Damagers/Projectile.cs
+```c#
+15             private Vector3 _initialPosition;
+```
+
+<br/>
+
+`_initialPosition`<swm-token data-swm-token=":Assets/Scripts/Weapons/Damagers/Projectile.cs:15:5:5:`        private Vector3 _initialPosition;`"/> - the starting point for the projectile
+
+*   This will be the `muzzle` of the gun
+    
+
+<br/>
+
 # Methods
+
+<br/>
+
+<br/>
+
+Stores the muzzle position.
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 Assets/Scripts/Weapons/Damagers/Projectile.cs
+```c#
+17             private void Awake() => _initialPosition = transform.position;
+```
+
+<br/>
+
+<br/>
+
+<br/>
+
+Moves the projectile forward until it passes its maximum range, in which case it destroys itself.
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 Assets/Scripts/Weapons/Damagers/Projectile.cs
+```c#
+19             private void FixedUpdate()
+20             {
+21                 transform.position += Direction * ProjectileSpeed;
+22                 if (Vector3.Distance(_initialPosition, transform.position) > MaxDistance)
+23                     Destroy(gameObject);
+24             }
+```
+
+<br/>
+
+<br/>
+
+<br/>
+
+Destroys the game object
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 Assets/Scripts/Weapons/Damagers/Projectile.cs
+```c#
+27             public void CollideWithObject() => Destroy(gameObject);
+```
+
+<br/>
+
+<br/>
+
+<br/>
+
+Required to satisfy the `IDamager` contract - is not used for this script.
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 Assets/Scripts/Weapons/Damagers/Projectile.cs
+```c#
+33             public void SetIsInDamagerCollider(bool value) { }
+```
 
 <br/>
 
