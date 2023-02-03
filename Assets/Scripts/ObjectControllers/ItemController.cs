@@ -70,7 +70,7 @@ namespace ObjectControllers
             playerController.onAddItemToPlayer?.Invoke(data);
             playerController.InteractablesInRange.Remove(this);
 
-            if (playerController.InteractablesInRange.Count > 0)
+            if (playerController.CheckIsInRangeOfInteractable())
                 playerController.InteractablesInRange[0].DisplayAlert();
             
             if (gameObject)

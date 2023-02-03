@@ -219,5 +219,13 @@ namespace Player
 			onDisplayItemInUI.Invoke(i.icon);
 			print($"Player received {i.itemName} item");
 		}
+
+		public bool CheckIsInRangeOfInteractable()
+		{
+			if (InteractablesInRange.Count == 0)
+				IsInRangeOfInteractable = false;
+
+			return IsInRangeOfInteractable;
+		}
 	}
 }
