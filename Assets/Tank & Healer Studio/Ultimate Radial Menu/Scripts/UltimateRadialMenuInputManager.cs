@@ -423,7 +423,7 @@ public class UltimateRadialMenuInputManager : MonoBehaviour
 		RaycastHit hit;
 
 		// Raycast with the calculated information.
-		if( Physics.Raycast( ray, out hit, Mathf.Infinity, worldSpaceMask ) )
+		if( UnityEngine.Physics.Raycast( ray, out hit, Mathf.Infinity, worldSpaceMask ) )
 		{
 			// If the collider that was hit is this radial menu...
 			if( hit.collider.gameObject == UltimateRadialMenuInformations[ radialMenuIndex ].radialMenu.gameObject )
@@ -1357,7 +1357,7 @@ public class UltimateRadialMenuInputManager : MonoBehaviour
 			RaycastHit hit;
 
 			// Raycast with the calculated information.
-			if( Physics.Raycast( ray, out hit, Mathf.Infinity, worldSpaceMask ) )
+			if( UnityEngine.Physics.Raycast( ray, out hit, Mathf.Infinity, worldSpaceMask ) )
 			{
 				// If the collider that was hit is this radial menu...
 				if( hit.collider.gameObject == UltimateRadialMenuInformations[ radialMenuIndex ].radialMenu.gameObject )
@@ -1524,7 +1524,7 @@ public class UltimateRadialMenuInputManager : MonoBehaviour
 			float distance = 0.0f;
 
 			// Raycast with the calculated information.
-			if( Physics.Raycast( ray, out hit, rayDistance, worldSpaceMask ) )
+			if( UnityEngine.Physics.Raycast( ray, out hit, rayDistance, worldSpaceMask ) )
 			{
 				// If the collider that was hit is this radial menu...
 				if( hit.collider.gameObject == UltimateRadialMenuInformations[ i ].radialMenu.gameObject )

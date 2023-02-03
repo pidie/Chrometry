@@ -59,7 +59,7 @@ public class CubeController : MonoBehaviour
 			RaycastHit hit;
 
 			// If the raycast hit something, then store the hit transform.
-			if( Physics.Raycast( ray, out hit ) )
+			if( UnityEngine.Physics.Raycast( ray, out hit ) )
 				onMouseDownTransform = hit.transform;
 			// Else, if the radial menu is active and the mouse is not over a button of the radial menu, then disable the menu.
 			else if( UltimateRadialMenu.GetUltimateRadialMenu( "ObjectExample" ).RadialMenuActive && UltimateRadialMenu.GetUltimateRadialMenu( "ObjectExample" ).CurrentButtonIndex < 0 )
@@ -75,7 +75,7 @@ public class CubeController : MonoBehaviour
 			RaycastHit hit;
 
 			// If the raycast hit something...
-			if( Physics.Raycast( ray, out hit ) )
+			if( UnityEngine.Physics.Raycast( ray, out hit ) )
 			{
 				// If the hit transform is the same as the transform when the mouse button was pressed...
 				if( hit.transform == onMouseDownTransform )
