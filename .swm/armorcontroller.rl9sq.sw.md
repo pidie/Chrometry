@@ -2,7 +2,7 @@
 id: rl9sq
 title: ArmorController
 file_version: 1.1.1
-app_version: 1.0.20
+app_version: 1.1.4
 ---
 
 # Overview
@@ -62,7 +62,7 @@ saves a reference to the `HealthController`<swm-token data-swm-token=":Assets/Sc
 14             {
 15                 _healthController = GetComponent<HealthController>();
 16                 _shieldController = GetComponent<ShieldController>();
-17                 _damagePercentageMitigatedInverse = 1 / (1 - damagePercentageMitigated);
+17                 EvaluateDamagePercentMitigatedInverse();
 18                 base.Awake();
 19             }
 ```

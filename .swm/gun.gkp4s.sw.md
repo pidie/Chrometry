@@ -2,7 +2,7 @@
 id: gkp4s
 title: Gun
 file_version: 1.1.1
-app_version: 1.1.0
+app_version: 1.1.4
 ---
 
 # Overview
@@ -175,7 +175,7 @@ Creates a projectile with necessary data and determines its initial direction.
 48     
 49                     // check to see if the projectile will hit something
 50                     Vector3 direction;
-51                     UnityEngine.Physics.Raycast(transform.position, transform.forward, out var hit, gunMod.range * 5);
+51                     UnityEngine.Physics.Raycast(transform.position, transform.forward, out var hit, gunStats.range * 5);
 52     
 53                     // the projectile will either fly straight for its range or will fly towards the first target in range
 54                     if (hit.point != Vector3.zero)
@@ -191,14 +191,14 @@ Creates a projectile with necessary data and determines its initial direction.
 64     
 65                     if (gunStats.critChance >= Random.Range(0f, 100f))
 66                     {
-67                         projectileGo = Instantiate(gunMod.projectile.critModel, muzzle.transform.position,
+67                         projectileGo = Instantiate(gunStats.projectile.critModel, muzzle.transform.position,
 68                             quaternion.identity);
 69                         projectile = projectileGo.GetComponent<Projectile>();
 70                         projectile.WillCriticallyHit = true;
 71                     }
 72                     else
 73                     {
-74                         projectileGo = Instantiate(gunMod.projectile.baseModel, muzzle.transform.position,
+74                         projectileGo = Instantiate(gunStats.projectile.baseModel, muzzle.transform.position,
 75                             quaternion.identity);
 76                         projectile = projectileGo.GetComponent<Projectile>();
 77                     }
@@ -206,12 +206,12 @@ Creates a projectile with necessary data and determines its initial direction.
 79                     projectileGo.transform.rotation = transform.rotation;
 80     
 81                     // store data in the projectile
-82                     projectile.MaxDistance = gunMod.range;
-83                     projectile.ProjectileSpeed = gunMod.projectileSpeed;
+82                     projectile.MaxDistance = gunStats.range;
+83                     projectile.ProjectileSpeed = gunStats.projectileSpeed;
 84                     projectile.Direction = direction;
 85                     projectile.CritDamageMultiplier = gunStats.critDamageMultiplier;
 86     
-87                     var damage = Random.Range(gunMod.damageMin, gunMod.damageMax);
+87                     var damage = Random.Range(gunStats.damageMin, gunStats.damageMax);
 88                     projectile.Damage = projectile.WillCriticallyHit ? damage * gunStats.critDamageMultiplier : damage;
 89                 }
 90             }
