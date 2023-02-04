@@ -11,15 +11,11 @@ This script is responsible for supplying controlled, artificial gravity to game 
 
 Each physics update, a downward force is added to either the transform or the `CharacterController`<swm-token data-swm-token=":Assets/Scripts/Tools/GravitationalForce.cs:15:3:3:`        private CharacterController _characterController;`"/> component if it is attached to a player character. This increase is stopped and reset when the object is grounded.
 
-<br/>
-
 ## The Math
 
 The formula for calculating the pull of gravity is:
 
 > _9.81 m/s^2_
-
-<br/>
 
 To simulate this, we have to multiply the gravity constant of `-9.81f`<swm-token data-swm-token=":Assets/Scripts/Tools/GravitationalForce.cs:17:11:14:`        private const float Gravity = -9.81f;`"/> by `Time.deltaTime`<swm-token data-swm-token=":Assets/Scripts/Tools/GravitationalForce.cs:31:11:13:`            _velocity.y += Gravity * Time.deltaTime * gravityMultiplier;`"/> by `Time.deltaTime`<swm-token data-swm-token=":Assets/Scripts/Tools/GravitationalForce.cs:31:11:13:`            _velocity.y += Gravity * Time.deltaTime * gravityMultiplier;`"/> again. We then multiply this by the `gravityMultiplier`<swm-token data-swm-token=":Assets/Scripts/Tools/GravitationalForce.cs:12:9:9:`        [SerializeField] private float gravityMultiplier = 1f;`"/> to simulate low or high gravity situations or effects.
 
@@ -72,8 +68,6 @@ Private Constant Fields
 <br/>
 
 `Gravity`<swm-token data-swm-token=":Assets/Scripts/Tools/GravitationalForce.cs:17:7:7:`        private const float Gravity = -9.81f;`"/> - the amount of force added when an object is not grounded
-
-<br/>
 
 # Methods
 
@@ -166,6 +160,12 @@ Adds force in the given direction, similar to a jump.
 <br/>
 
 <br/>
+
+# Related Articles
+
+*   [PlayerController](playercontroller.m2epd.sw.md)
+    
+*   [GroundCheck](groundcheck.lnyas.sw.md)
 
 <br/>
 
